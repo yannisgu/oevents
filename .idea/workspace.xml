@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.openshift/action_hooks/build" afterPath="$PROJECT_DIR$/.openshift/action_hooks/build" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.openshift/action_hooks/pre_build" afterPath="$PROJECT_DIR$/.openshift/action_hooks/pre_build" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.openshift/action_hooks/start" afterPath="$PROJECT_DIR$/.openshift/action_hooks/start" />
     </list>
     <ignored path="oevents.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" time="1379532351832" ignored="false" />
     <file path="/app.js" changelist="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" time="1379532464641" ignored="false" />
     <file path="/start" changelist="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" time="1379536425356" ignored="false" />
-    <file path="/pre_build" changelist="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" time="1379537500653" ignored="false" />
+    <file path="/pre_build" changelist="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" time="1379537791553" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pre_build" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pre_build" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/pre_build">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="9" selection-start="266" selection-end="282" vertical-scroll-proportion="0.0">
+            <state line="5" column="60" selection-start="317" selection-end="317" vertical-scroll-proportion="0.105337076">
               <folding />
             </state>
           </provider>
@@ -68,7 +69,7 @@
       <file leaf-file-name="start" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/start">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="50" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+            <state line="7" column="50" selection-start="321" selection-end="362" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -101,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/build">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
@@ -132,9 +133,9 @@
         <option value="$PROJECT_DIR$/.openshift/action_hooks/before_build" />
         <option value="$PROJECT_DIR$/.openshift/action_hooks/README.md" />
         <option value="$PROJECT_DIR$/.openshift/action_hooks/stop" />
+        <option value="$PROJECT_DIR$/.openshift/action_hooks/build" />
         <option value="$PROJECT_DIR$/.openshift/action_hooks/start" />
         <option value="$PROJECT_DIR$/.openshift/action_hooks/pre_build" />
-        <option value="$PROJECT_DIR$/.openshift/action_hooks/build" />
       </list>
     </option>
   </component>
@@ -378,23 +379,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/build">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/start">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="50" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+        <state line="7" column="50" selection-start="321" selection-end="362" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/pre_build">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="9" selection-start="266" selection-end="282" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/build">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+        <state line="5" column="60" selection-start="317" selection-end="317" vertical-scroll-proportion="0.105337076">
           <folding />
         </state>
       </provider>
