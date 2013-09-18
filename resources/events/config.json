@@ -1,0 +1,133 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 0
+		},
+		"date": {
+			"name": "date",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "date",
+			"order": 1
+		},
+		"url": {
+			"name": "url",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "url",
+			"order": 2
+		},
+		"source": {
+			"name": "source",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "source",
+			"order": 3
+		},
+		"idSource": {
+			"name": "idSource",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "idSource",
+			"order": 4
+		},
+		"map": {
+			"name": "map",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "map",
+			"order": 5
+		},
+		"region": {
+			"name": "region",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "region",
+			"order": 6
+		},
+		"organiser": {
+			"name": "organiser",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "organiser",
+			"order": 7
+		},
+		"classification": {
+			"name": "classification",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "classification",
+			"order": 8
+		},
+		"eventCenter": {
+			"name": "eventCenter",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "eventCenter",
+			"order": 9
+		},
+		"eventCenterLatitude": {
+			"name": "eventCenterLatitude",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "eventCenterLatitude",
+			"order": 10
+		},
+		"eventCenterLongitude": {
+			"name": "eventCenterLongitude",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "eventCenterLongitude",
+			"order": 11
+		},
+		"day": {
+			"name": "day",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "day",
+			"order": 12
+		},
+		"night": {
+			"name": "night",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "night",
+			"order": 13
+		},
+		"distanceType": {
+			"name": "distanceType",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "distanceType",
+			"order": 14
+		},
+		"discipline": {
+			"name": "discipline",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "discipline",
+			"order": 15
+		}
+	}
+}
