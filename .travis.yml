@@ -7,6 +7,6 @@ deploy:
   password:
     secure: PhafLjgHD3AjAJ/k+qr6e1nS3rFv/nmHZpAoz2EbVegcLt5xfg4Mx8eb6aJnsCJnEav4INnIFNc5d3TRnIDHEtfYDFYleSe/oTrNrmF7VsvP1GsxHw6vGKW1Ic3GKR/InwlYMnZuT1o8jAvNLVo6Yfe/wcT927Iw/lGSKklzMQM=
   app: oevents
-  domain: oevents-monkeytech.rhcloud.com
+  domain: monkeytech
   on:
     repo: yannisgu/oevents
