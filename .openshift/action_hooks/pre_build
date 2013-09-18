@@ -3,7 +3,7 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
-         echo "pre build"    >${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 &
+         echo "pre build"
 NAVE=$OPENSHIFT_DATA_DIR/nave/nave.sh
 
 # If `nave` doesn't exist we get it from GitHub.

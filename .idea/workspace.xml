@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6ae4f0f2-3d77-4cf7-8fa6-850ebf7ab5cb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.openshift/action_hooks/pre_build" afterPath="$PROJECT_DIR$/.openshift/action_hooks/pre_build" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.openshift/action_hooks/start" afterPath="$PROJECT_DIR$/.openshift/action_hooks/start" />
     </list>
     <ignored path="oevents.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,7 +59,7 @@
       <file leaf-file-name="pre_build" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/pre_build">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="60" selection-start="317" selection-end="317" vertical-scroll-proportion="0.105337076">
+            <state line="5" column="25" selection-start="282" selection-end="282" vertical-scroll-proportion="0.105337076">
               <folding />
             </state>
           </provider>
@@ -395,7 +394,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.openshift/action_hooks/pre_build">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="60" selection-start="317" selection-end="317" vertical-scroll-proportion="0.105337076">
+        <state line="5" column="25" selection-start="282" selection-end="282" vertical-scroll-proportion="0.105337076">
           <folding />
         </state>
       </provider>
