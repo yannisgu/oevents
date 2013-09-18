@@ -25,6 +25,7 @@
   },
 
   "dependencies": {
+	"deployd": "*" 
   },
   "devDependencies": {},
   "bundleDependencies": [],
