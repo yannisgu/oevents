@@ -10,6 +10,7 @@ if [ ! -f $NAVE ]; then
   cd $OPENSHIFT_DATA_DIR/nave
   echo 'Downloading isaacs/nave from GitHub...'
   wget https://raw.github.com/isaacs/nave/41471976e440018447118b04d02e6862f7ad8357/nave.sh
+   chmod 755 nave.sh
   cd ..
 fi
 
