@@ -7,8 +7,10 @@
 
 # If `nave` doesn't exist we get it from GitHub.
 if [ ! -f $NAVE ]; then
+  cd $OPENSHIFT_DATA_DIR/nave
   echo 'Downloading isaacs/nave from GitHub...'
-  git clone git://github.com/isaacs/nave.git $OPENSHIFT_DATA_DIR/nave
+  wget https://raw.github.com/isaacs/nave/41471976e440018447118b04d02e6862f7ad8357/nave.sh
+  cd ..
 fi
 
 # We go into the repo where the app lives so we can run `npm install` in there.
