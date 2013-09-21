@@ -3,6 +3,26 @@
 # script. The application will work only if it binds to
 # $OPENSHIFT_INTERNAL_IP:8080
  
-HOME=$OPENSHIFT_DATA_DIR nohup $OPENSHIFT_DATA_DIR/nave/nave.sh use 0.8.10 \
-  $OPENSHIFT_REPO_DIR'app.js' $OPENSHIFT_INTERNAL_PORT $OPENSHIFT_INTERNAL_IP \
+ NAVE=$OPENSHIFT_DATA_DIR/nave/nave.sh
+
+# If `nave` doesn't exist we get it from GitHub.
+if [ ! -f $NAVE ]; then
+  cd $OPENSHIFT_DATA_DIR/nave
+  echo 'Downloading isaacs/nave from GitHub...'
+  wget https://raw.github.com/isaacs/nave/41471976e440018447118b04d02e6862f7ad8357/nave.sh
+   chmod 755 nave.sh
+  cd ..
+fi
+
+# We go into the repo where the app lives so we can run `npm install` in there.
+cd $OPENSHIFT_REPO_DIR
+
+# Use `nave` to make sure we use the right `node` and `npm` versions.
+# We set the `$HOME` environment variable to data dir as this is the only place
+# where we can write and `npm` will need to do so in home.
+HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.10 npm install -d
+ 
+ 
+HOME=$OPENSHIFT_DATA_DIR nohup $OPENSHIFT_DATA_DIR/nave/nave.sh use 0.10.10 \
+  $OPENSHIFT_REPO_DIR'app.js' \
   >${OPENSHIFT_DIY_LOG_DIR}/app.log 2>&1 &
