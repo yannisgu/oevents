@@ -128,6 +128,14 @@
 			"required": false,
 			"id": "discipline",
 			"order": 15
+		},
+		"lastModification": {
+			"name": "lastModification",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastModification",
+			"order": 16
 		}
 	}
 }

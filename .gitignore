@@ -1,4 +1,4 @@
 .dpd
-node_modules
-data
 .idea
+data
+node_modules

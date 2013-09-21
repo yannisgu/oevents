@@ -1,4 +1,4 @@
-## oevents
+## oevents  [![Build Status](https://travis-ci.org/yannisgu/oevents.png?branch=master)](https://travis-ci.org/yannisgu/oevents)
 
 ### API
 
