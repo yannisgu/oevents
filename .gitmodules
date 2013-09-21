@@ -1,0 +1,3 @@
+[submodule "node_modules/dpd-jobs"]
+	path = node_modules/dpd-jobs
+	url = https://github.com/yannisgu/dpd-jobs.git
