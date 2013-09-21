@@ -1,8 +1,7 @@
 language: node_js
 node_js:
 - '0.10'
-before_install:
-  - rm -r node_modules/dpd-jobs
+
 deploy:
   provider: openshift
   user: me@yannisguedel.ch
