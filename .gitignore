@@ -1,5 +1,4 @@
 .dpd
 .idea
 data
-node_modules/.bin
-node_modules/deployd
+node_modules
