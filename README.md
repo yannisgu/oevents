@@ -1,3 +1,17 @@
-The OpenShift `diy` cartridge documentation can be found at:
+## oevents
 
-https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-diy/README.md
+### API
+
+#### classification
+Which importance the race has. The following values are valid:
+ - 1=championship
+ - 2=national competition
+ - 3=regional competition
+ - 4=local competition
+ - 5=club competition
+
+ ### discipline
+ Foot, Ski or Bike-Orienteering:
+  - 1 = Foot
+  - 2 = Ski
+  - 3 = Bike
