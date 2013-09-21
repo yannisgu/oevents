@@ -21,7 +21,8 @@ cd $OPENSHIFT_REPO_DIR
 # We set the `$HOME` environment variable to data dir as this is the only place
 # where we can write and `npm` will need to do so in home.
 HOME=$OPENSHIFT_DATA_DIR $NAVE use 0.10.10 npm install -d
- 
+
+ chmod 700  $OPENSHIFT_REPO_DIR'app.js'
  
 HOME=$OPENSHIFT_DATA_DIR nohup $OPENSHIFT_DATA_DIR/nave/nave.sh use 0.10.10 \
   $OPENSHIFT_REPO_DIR'app.js' \
