@@ -7,6 +7,7 @@ script:
  - ./node_modules/.bin/grunt
  - npm uninstall grunt-cli
  - git add .
+ - git commit -m "commit from travis"
 
 deploy:
   provider: openshift
