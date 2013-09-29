@@ -7,7 +7,7 @@ script:
  - ./node_modules/.bin/grunt
  - npm uninstall grunt-cli
  - git config --global user.email "me@yannisguedel.ch"
- - git config --global user.name "Yannis Güdels"
+ - git config --global user.name "Yannis Guedel"
  - git add .
  - git commit -m "commit from travis"
 
