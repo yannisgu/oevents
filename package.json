@@ -7,18 +7,24 @@
     "type": "git",
     "url": "https://gitub.com/yannisgu/oevents"
   },
-
   "engines": {
     "node": ">= 0.8.0"
   },
-
   "dependencies": {
-	"deployd": "",
-      "dpd-jobs":""
-  },
-  "devDependencies": {},
-  "bundleDependencies": [],
+    "deployd": "",
+    "dpd-jobs": "",
+    "async": "",
 
+      "ent": ""
+  },
+  "devDependencies": {
+      "grunt-cli": "",
+      "grunt": "",
+    "grunt-html2js": "~0.1.7",
+    "grunt-less": "~0.1.7",
+    "grunt-contrib-less": "~0.7.0"
+  },
+  "bundleDependencies": [],
   "private": true,
   "main": "app.js"
 }

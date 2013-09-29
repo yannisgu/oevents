@@ -1,0 +1,28 @@
+<div class="template-results">
+
+    <tabset>
+        <tab heading="By Person">
+            <div ng-controller="ResultsByPersonCtrl">
+                <form class="form-inline" role="form" ng-submit="search()">
+                    <div class="form-group">
+                        <label class="sr-only" for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Enter name" ng-model="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="yearOfBirth">Year of birth</label>
+                        <input type="number" class="form-control" id="yearOfBirth" placeholder="Year of birth" ng-model="yearOfBirth">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+
+                <div ng-repeat="result in results">
+                    <a href="http://www.o-l.ch/cgi-bin/{{result.event.urlSource}}">"{{result.event.name}}</a> {{result.event.date | date:'mediumDate'}}
+                </div>
+            </div>
+
+        </tab>
+        <tab heading="By Category">
+
+        </tab>
+    </tabset>
+</div>

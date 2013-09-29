@@ -25,29 +25,13 @@
 			"id": "url",
 			"order": 2
 		},
-		"source": {
-			"name": "source",
-			"type": "string",
-			"typeLabel": "string",
-			"required": false,
-			"id": "source",
-			"order": 3
-		},
-		"idSource": {
-			"name": "idSource",
-			"type": "number",
-			"typeLabel": "number",
-			"required": false,
-			"id": "idSource",
-			"order": 4
-		},
 		"map": {
 			"name": "map",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
 			"id": "map",
-			"order": 5
+			"order": 3
 		},
 		"region": {
 			"name": "region",
@@ -55,7 +39,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "region",
-			"order": 6
+			"order": 4
 		},
 		"organiser": {
 			"name": "organiser",
@@ -63,7 +47,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "organiser",
-			"order": 7
+			"order": 5
 		},
 		"classification": {
 			"name": "classification",
@@ -71,7 +55,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "classification",
-			"order": 8
+			"order": 6
 		},
 		"eventCenter": {
 			"name": "eventCenter",
@@ -79,7 +63,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "eventCenter",
-			"order": 9
+			"order": 7
 		},
 		"eventCenterLatitude": {
 			"name": "eventCenterLatitude",
@@ -87,7 +71,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "eventCenterLatitude",
-			"order": 10
+			"order": 8
 		},
 		"eventCenterLongitude": {
 			"name": "eventCenterLongitude",
@@ -95,7 +79,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "eventCenterLongitude",
-			"order": 11
+			"order": 9
 		},
 		"day": {
 			"name": "day",
@@ -103,7 +87,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "day",
-			"order": 12
+			"order": 10
 		},
 		"night": {
 			"name": "night",
@@ -111,7 +95,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "night",
-			"order": 13
+			"order": 11
 		},
 		"distanceType": {
 			"name": "distanceType",
@@ -119,7 +103,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "distanceType",
-			"order": 14
+			"order": 12
 		},
 		"discipline": {
 			"name": "discipline",
@@ -127,7 +111,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "discipline",
-			"order": 15
+			"order": 13
 		},
 		"lastModification": {
 			"name": "lastModification",
@@ -135,7 +119,31 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "lastModification",
+			"order": 14
+		},
+		"source": {
+			"name": "source",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "source",
+			"order": 15
+		},
+		"idSource": {
+			"name": "idSource",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "idSource",
 			"order": 16
+		},
+		"urlSource": {
+			"name": "urlSource",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "urlSource",
+			"order": 17
 		}
 	}
 }

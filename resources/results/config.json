@@ -1,0 +1,45 @@
+{
+	"type": "Collection",
+	"properties": {
+		"eventId": {
+			"name": "eventId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "eventId",
+			"order": 0
+		},
+		"category": {
+			"name": "category",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "category",
+			"order": 1
+		},
+		"rank": {
+			"name": "rank",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "rank",
+			"order": 2
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 3
+		},
+		"yearOfBirth": {
+			"name": "yearOfBirth",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "yearOfBirth",
+			"order": 4
+		}
+	}
+}
