@@ -21,8 +21,8 @@
       "grunt-cli": "",
       "grunt": "",
     "grunt-html2js": "~0.1.7",
-    "grunt-less": "~0.1.7",
-    "grunt-contrib-less": "~0.7.0"
+    "grunt-contrib-less": "~0.7.0",
+      "grunt-typescript": ""
   },
   "bundleDependencies": [],
   "private": true,
