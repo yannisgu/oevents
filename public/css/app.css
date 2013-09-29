@@ -1,0 +1,16 @@
+body {
+  padding-top: 50px;
+}
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.template-results {
+  margin-top: 10px;
+}
+.template-results .results-list {
+  margin-top: 10px;
+}
+.template-results .accordion-inner {
+  padding: 0px;
+}
