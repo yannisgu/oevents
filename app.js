@@ -6,7 +6,7 @@ console.log(process.env.OPENSHIFT_APP_NAME);
 var server = deployd({
     port: process.env.OPENSHIFT_DIY_PORT || 5000,
     host: process.env.OPENSHIFT_DIY_IP,
-    env: 'development',
+    env: 'production',
     db: {
         host: process.env.OPENSHIFT_MONGODB_DB_HOST,
         port: parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT, 10),
