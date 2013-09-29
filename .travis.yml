@@ -6,6 +6,7 @@ node_js:
 script:
  - ./node_modules/.bin/grunt
  - npm uninstall grunt-cli
+ - git add .
 
 deploy:
   provider: openshift
