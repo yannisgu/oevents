@@ -3,7 +3,9 @@ node_js:
 - '0.10'
 
 
-script: ./node_modules/.bin/grunt
+script:
+ - ./node_modules/.bin/grunt
+ - npm uninstall grunt-cli
 
 deploy:
   provider: openshift
