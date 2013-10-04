@@ -10,7 +10,7 @@ var server = deployd({
     db: {
         host: "widmore.mongohq.com",
         port: 10010,
-        name:  oevents,
+        name:  "oevents",
         credentials: {
             username: "yannisgu",
             password: process.env.MONGODB_PASSWORD
