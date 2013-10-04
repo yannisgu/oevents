@@ -13,7 +13,7 @@ var server = deployd({
         name:  "oevents",
         credentials: {
             username: "yannisgu",
-            password: process.env.MONGODB_PASSWORD
+            password: process.env.MONGOHQ_PASSWORD
         }
     }
 });
