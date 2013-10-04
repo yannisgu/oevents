@@ -4,16 +4,16 @@ console.log(process.env.OPENSHIFT_APP_NAME);
 
 
 var server = deployd({
-    port: process.env.OPENSHIFT_DIY_PORT || 5000,
-    host: process.env.OPENSHIFT_DIY_IP,
-    env: 'production',
+    port: process.env.OPENSHIFT_NODEJS_PORT || 5000,
+    host: process.env.OPENSHIFT_NODEJS_IP,
+    env: process.env.NODE_ENV,
     db: {
-        host: process.env.OPENSHIFT_MONGODB_DB_HOST,
-        port: parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT, 10),
-        name:  process.env.OPENSHIFT_APP_NAME,
+        host: "widmore.mongohq.com",
+        port: 10010,
+        name:  oevents,
         credentials: {
-            username: "admin",
-            password: process.env.OPENSHIFT_MONGODB_DB_PASSWORD
+            username: "yannisgu",
+            password: process.env.MONGODB_PASSWORD
         }
     }
 });
