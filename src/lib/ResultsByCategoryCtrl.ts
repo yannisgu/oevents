@@ -1,53 +1,57 @@
-module Controllers{
-    export interface IResultsByPersonScope extends ng.IScope {
-        name: String;
-        yearOfBirth : String;
-        sortField: String;
-        search: Function;
-        sort: Function;
-        groups: Array<IGroupResults>;
-        loading : Boolean;
-        groupByYear: Boolean;
+module Controllers {
+
+
+    export interface IResultsByCategoryScope extends ng.IScope {
+        category : String;
+        search : Function;
         fromDate: Date;
         toDate: Date;
-
+        loading : Boolean;
+        sortField: String;
+        sort: Function;
+        groups: Array<IGroupCategoryResults>;
     }
 
-    export interface IGroupResults {
+
+
+    export interface IGroupCategoryResults {
         title;
-        results: Array;
+        persons;
         isOpen: Boolean;
     }
 
+    export class ResultsByCategoryCtrl {
 
-    export class ResultsByPersonCtrl{
-
-
-
-        constructor($scope : IResultsByPersonScope){
-            $scope.sortField = "event.date";
+        constructor($scope : IResultsByCategoryScope){
+            $scope.sortField = "name";
 
             $scope.search = function() {
-                var yearOfBirth = $scope.yearOfBirth;
-                if(yearOfBirth.length == 4){
-                    yearOfBirth = yearOfBirth.substr(2);
-                }
-
                 $scope.loading = true;
                 $scope.groups = [];
 
-                dpd.resultsevents.get({name: $scope.name, yearOfBirth: yearOfBirth}, function(res, err){
+                dpd.results.get({category: $scope.category}, function(res, err){
                     $scope.loading = false;
                     if(err) {
                         $scope.$apply();
                         throw err;
                     }
-                    res = _.map(res, function(result) {
-                        if(result.event && result.event.date){
-                            result.event.date = new Date(result.event.date);
+                    var persons = _.reduce(res, function(merged, object, index){
+                        var index = object.name + object.yearOfBirth;
+                        merged[index] = merged[index] || {
+                            name: object.name,
+                            yearOfBirth: object.yearOfBirth,
+                            victories : 0,
+                            counts : 0,
+                            podiums: 0
+
                         }
-                        return result;
-                    });
+                        if(object.rank == 1) merged[index].victories++;
+                        if(_.indexOf([1,2,3], object.rank, true) > -1) merged[index].podiums++;
+                        merged[index].counts++;
+                        return merged;
+                    }, {});
+
+
 
                     if($scope.fromDate || $scope.toDate) {
                         res = _.filter(res, function(result){
@@ -62,10 +66,16 @@ module Controllers{
                             return returnValue;
                         });
                     }
+                    var personsArray = [];
 
-                    var groups : Array<IGroupResults> = [];
+                    for(var i in persons){
+                        personsArray.push(persons[i]);
+                    }
 
-                    if($scope.groupByYear){
+
+                    var groups : Array<IGroupCategoryResults> = [];
+
+                    /*if($scope.groupByYear){
                         var groupObj =  _.groupBy(res, function(result){
                             return result.event.date.getFullYear();
                         })
@@ -78,15 +88,15 @@ module Controllers{
                             })
                         }
 
-                       groups = _.sortBy(groups, "title" );
+                        groups = _.sortBy(groups, "title" );
                     }
-                    else{
+                    else{*/
                         groups.push({
                             title : "All",
-                            results: res,
+                            persons: personsArray,
                             isOpen: true
                         })
-                    }
+                   // }
 
                     $scope.groups = groups;
                     $scope.$apply();
@@ -97,5 +107,8 @@ module Controllers{
                 $scope.sortField = $scope.sortField == field ? "-" + $scope.sortField :  field;
             }
         }
+
+
     }
+
 }

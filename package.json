@@ -14,7 +14,7 @@
     "deployd": "",
     "dpd-jobs": "",
     "async": "",
-
+      "dpd-fake-collection": "",
       "ent": ""
   },
   "devDependencies": {

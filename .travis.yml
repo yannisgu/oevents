@@ -12,7 +12,7 @@ before_deploy:
  - git config --global user.name "Yannis Guedel"
  - git add .
  - git commit -m "commit from travis"
- 
+
 deploy:
  - git config --global user.email "me@yannisguedel.ch"
  - git config --global user.name "Yannis Guedel"

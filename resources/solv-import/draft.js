@@ -97,16 +97,17 @@ function importLine(line, titles) {
                         object.lastModification = Date.parse(object.last_modification);
                     }
                     
+                    out.log(object)
                     dpd.events.get({source: 'solv', idSource: object.idSource}, function(result, err) {
                         if(result.length > 0) {
                             dpd.events.put(result[0].id, object, function(res, err){
-                                out.log("updated::: " + res.name)
+                                console.log(res)
                             
                             })
                         }
                         else {
                             dpd.events.post(object, function(res, err) {
-                                out.log("added::: " + res.name)
+                                console.log(res)
                             });
                             
                         }
