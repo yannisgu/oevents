@@ -1,31 +1,10 @@
 language: node_js
 node_js:
-- '0.10'
+- '0.8'
 
 
 script:
  - ./node_modules/.bin/grunt
  - npm uninstall grunt-cli
 
-before_deploy:
- - git config --global user.email "me@yannisguedel.ch"
- - git config --global user.name "Yannis Guedel"
- - git add .
- - git commit -m "commit from travis"
 
-deploy:
- - git config --global user.email "me@yannisguedel.ch"
- - git config --global user.name "Yannis Guedel"
- - git add .
- - git commit -m "commit from travis"
-
-deploy:
-  provider: openshift
-  user: me@yannisguedel.ch
-  password:
-    secure: PhafLjgHD3AjAJ/k+qr6e1nS3rFv/nmHZpAoz2EbVegcLt5xfg4Mx8eb6aJnsCJnEav4INnIFNc5d3TRnIDHEtfYDFYleSe/oTrNrmF7VsvP1GsxHw6vGKW1Ic3GKR/InwlYMnZuT1o8jAvNLVo6Yfe/wcT927Iw/lGSKklzMQM=
-  app: oevents
-  domain: monkeytech
-  skip_cleanup: true
-  on:
-    branch: master
