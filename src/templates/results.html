@@ -1,16 +1,16 @@
 <div class="template-results">
 
     <tabset>
-        <tab heading="By Person">
+        <tab heading="By Person" active="tabPersonOpen">
             <div ng-controller="ResultsByPersonCtrl">
                 <form class="form-inline" role="form" ng-submit="search()">
                    <!-- <div class="form-group">
                         <label class="sr-only" for="inputName">Name</label> -->
-                        <input type="text" class="form-control" id="inputName" placeholder="Enter name" ng-model="name" required>
+                        <input type="text" class="form-control" id="inputName" placeholder="Firstname Lastname" ng-model="name" required>
                    <!-- </div>
                     <div class="form-group">
                         <label class="sr-only" for="yearOfBirth">Year of birth</label> -->
-                        <input type="text" class="form-control" size="5" id="yearOfBirth" placeholder="Year of birth" ng-model="yearOfBirth" required pattern="([0-9]{2})?\d\d" title="Enter valid year of birth">
+                        <input type="text" class="form-control" size="5" id="yearOfBirth" placeholder="Year of birth" ng-model="yearOfBirth" pattern="([0-9]{2})?\d\d" title="Enter valid year of birth">
                    <!-- </div>
                     <div class="checkbox">
                         <label class="checkbox">-->
@@ -40,11 +40,11 @@
 
                                     <tr ng-repeat="result in group.results  | orderBy:sortField">
                                         <td>
-                                            <a href="{{result.event.urlSource}}">
+                                            <a href="{{result.event.url}}">
                                                 {{result.event.name}}
-                                    <span ng-hide="result.event.name">
-                                        {{result.event.urlSource}}
-                                    </span>
+                                                <span ng-hide="result.event.name">
+                                                    {{result.event.url}}
+                                                </span>
                                             </a>
                                         </td>
                                         <td>{{result.event.date | date:'mediumDate'}}</td>
@@ -66,7 +66,7 @@
             </div>
 
         </tab>
-        <tab heading="By Category">
+        <tab heading="By Category" active="tabCategoryOpen">
             <div ng-controller="ResultsByCategoryCtrl">
                 <form class="form-inline" role="form" ng-submit="search()">
                     <!-- <div class="form-group">
@@ -103,9 +103,9 @@
                                         <th><a href="" ng-click="sort('counts')">Participations</a></th>
                                     </tr>
 
-                                    <tr ng-repeat="person in group.persons | orderBy:sortField">
+                                    <tr ng-repeat="person in group.persons  | orderBy:sortField">
                                         <td>
-                                            <a href="{{result.event.urlSource}}">
+                                            <a  ng-click="openPerson(person.name)" >
                                                 {{person.name}}
                                             </a>
                                         </td>

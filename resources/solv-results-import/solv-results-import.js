@@ -68,7 +68,7 @@ function importResults(options, fn) {
         body = ent.decode(body)
         var categories = new Array();
         
-        var reg = /<b>(.*?)<.b>\s<pre>\( (\d*?.\d*?) km,\s*?(\d*?) m,  ?(\d*?) Po.\)(.*\s*)*?<.pre>/g
+        var reg = /<b>(?:<p><.p>)?(.*?)<.b>\s<pre>\( (\d*?.\d*?) km,\s*?(\d*?) m,  ?(\d*?) Po.\)(.*\s*)*?<.pre>/g
         
         while(res = reg.exec(body)){
             categories.push({sourceCode: res[0], name: res[1]});
