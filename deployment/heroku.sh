@@ -35,6 +35,7 @@ heroku git:remote --app oevents
 ssh-keygen -t rsa -f ~/.heroku_key -N '' -I "deploykey@travis"
 
 chmod 600 ~/.heroku_key
+ssh-add -D
 ssh-add ~/.heroku_key
 heroku keys:add ~/.heroku_key.pub
 
