@@ -39,7 +39,7 @@ angular.module("templates/results.html", []).run(["$templateCache", function($te
     "                    <div ng-hide=\"loading\">\n" +
     "\n" +
     "                        <accordion close-others=\"false\">\n" +
-    "                            <accordion-group heading=\"{{group.title}} ({{group.results.length}})\" ng-repeat=\"group in groups\" is-open=\"group.isOpen\">\n" +
+    "                            <accordion-group heading=\"{{group.title}} ({{group.results.length}})\" ng-repeat=\"group in groups\" is-open=\"true\">\n" +
     "                                <table class=\"table table-striped\">\n" +
     "                                    <tr>\n" +
     "                                        <th><a href=\"\" ng-click=\"sort('event.name')\">Competition</a></th>\n" +
@@ -90,21 +90,15 @@ angular.module("templates/results.html", []).run(["$templateCache", function($te
     "                    <!-- </div>\n" +
     "                     <div class=\"checkbox\">\n" +
     "                         <label class=\"checkbox\">-->\n" +
-    "                    <input type=\"checkbox\" ng-model=\"groupByYear\">\n" +
-    "                    Group by year\n" +
-    "                    </label>\n" +
     "\n" +
-    "                    <input type=\"text\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"fromDate\" placeholder=\"From\" pattern=\"\\d\\d\\.\\d\\d.(\\d\\d)?\\d\\d\"  title=\"Enter a valid date\" />\n" +
-    "                    <input type=\"text\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"toDate\" placeholder=\"To\" pattern=\"\\d\\d\\.\\d\\d.(\\d\\d)?\\d\\d\" title=\"Enter a valid date\" />\n" +
-    "                    <!--</div> -->\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default\">Search</button>\n" +
+    "                   <button type=\"submit\" class=\"btn btn-default\">Search</button>\n" +
     "                </form>\n" +
     "\n" +
     "                <div class=\"results-list\">\n" +
-    "                    <div ng-hide=\"loading\">\n" +
+    "                    <div ng-hide=\"loading || !persons\">\n" +
     "\n" +
     "                        <accordion close-others=\"false\">\n" +
-    "                            <accordion-group heading=\"{{group.title}} ({{group.persons.length}})\" ng-repeat=\"group in groups\" is-open=\"group.isOpen\">\n" +
+    "                            <accordion-group heading=\"All ({{persons.length}})\"  is-open=\"true\">\n" +
     "                                <table class=\"table table-striped\">\n" +
     "                                    <tr>\n" +
     "                                        <th><a href=\"\" ng-click=\"sort('name')\">Name</a></th>\n" +
@@ -114,7 +108,7 @@ angular.module("templates/results.html", []).run(["$templateCache", function($te
     "                                        <th><a href=\"\" ng-click=\"sort('counts')\">Participations</a></th>\n" +
     "                                    </tr>\n" +
     "\n" +
-    "                                    <tr ng-repeat=\"person in group.persons  | orderBy:sortField\">\n" +
+    "                                    <tr ng-repeat=\"person in persons  | orderBy:sortField\">\n" +
     "                                        <td>\n" +
     "                                            <a  ng-click=\"openPerson(person.name)\" >\n" +
     "                                                {{person.name}}\n" +

@@ -11,6 +11,7 @@ module App.Controllers {
         sort: Function;
         openPerson: Function;
         groups: Array<IGroupCategoryResults>;
+        query: Object;
     }
 
     interface ICategoryQuery{
@@ -56,7 +57,8 @@ module App.Controllers {
                 var queryString = $location.search().queryCategory;
                 if (queryString) {
                     var query:ICategoryQuery = JSON.parse(queryString);
-                    if (JSON.stringify(query) != JSON.stringify(getQuery($scope))) {
+                    if (JSON.stringify(query) != JSON.stringify($scope.query)) {
+                        $scope.query = query;
                         $scope.loading = true;
                         $scope.category = query.category
 
@@ -80,6 +82,9 @@ module App.Controllers {
                 $scope.$apply();
                 throw err;
             }
+
+            console.log(new Date().getTime())
+
             var persons = _.reduce(res, function (merged, object, index) {
                 var index = object.name + object.yearOfBirth;
                 merged[index] = merged[index] || {
@@ -96,53 +101,14 @@ module App.Controllers {
                 return merged;
             }, {});
 
-
-            if ($scope.fromDate || $scope.toDate) {
-                res = _.filter(res, function (result) {
-                    var returnValue = true;
-                    if ($scope.fromDate) {
-                        returnValue = returnValue && $scope.fromDate <= result.event.date;
-                    }
-                    if ($scope.toDate) {
-                        returnValue = returnValue && $scope.toDate >= result.event.date;
-                    }
-
-                    return returnValue;
-                });
-            }
             var personsArray = [];
 
             for (var i in persons) {
                 personsArray.push(persons[i]);
             }
 
+            $scope.persons = personsArray;
 
-            var groups:Array<IGroupCategoryResults> = [];
-
-            /*if($scope.groupByYear){
-             var groupObj =  _.groupBy(res, function(result){
-             return result.event.date.getFullYear();
-             })
-
-             for(var i in groupObj){
-             groups.push({
-             title: i,
-             results: groupObj[i],
-             isOpen: false
-             })
-             }
-
-             groups = _.sortBy(groups, "title" );
-             }
-             else{*/
-            groups.push({
-                title: "All",
-                persons: personsArray,
-                isOpen: true
-            })
-            // }
-
-            $scope.groups = groups;
             $scope.$apply();
         });
     }

@@ -10,6 +10,7 @@ module App.Controllers {
         groupByYear: Boolean;
         fromDate: Date;
         toDate: Date;
+        query: Object;
 
     }
 
@@ -30,7 +31,6 @@ module App.Controllers {
 
         constructor($scope:IResultsByPersonScope, $location:ng.ILocationService) {
 
-            $scope.loading = true;
             $scope.groups = [];
 
             $scope.$on("newQuery", function () {
@@ -55,7 +55,8 @@ module App.Controllers {
                 var queryString = $location.search().queryPerson;
                 if (queryString) {
                     var query:IQuery = JSON.parse(queryString);
-                    if (JSON.stringify(query) != JSON.stringify(getQuery($scope))) {
+                    if (JSON.stringify(query) != JSON.stringify($scope.query)) {
+                        $scope.query = query;
                         $scope.loading = true;
                         $scope.name = query.name
 
@@ -126,7 +127,7 @@ module App.Controllers {
                     groups.push({
                         title: i,
                         results: groupObj[i],
-                        isOpen: false
+                        isOpen: true
                     })
                 }
 

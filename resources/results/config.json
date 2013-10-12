@@ -40,6 +40,14 @@
 			"required": false,
 			"id": "yearOfBirth",
 			"order": 4
+		},
+		"club": {
+			"name": "club",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "club",
+			"order": 5
 		}
 	}
 }

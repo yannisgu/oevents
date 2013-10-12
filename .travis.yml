@@ -1,10 +1,12 @@
 language: node_js
 node_js:
 - '0.8'
-
-
+pre_script:
+- gem install af
+- gem install heroku
 script:
- - ./node_modules/.bin/grunt
- - npm uninstall grunt-cli
-
-
+- ./node_modules/.bin/grunt
+- ./deployment/heroku.sh
+env:
+  global:
+    secure: UX6lx9lsHaiosBRVm/53KAzSrMKjseO4z+CN6MfmQ8IcY/Ih17PnMPNq3FvMeJZP2g5+pwuq6aYkelDlPYqvvDU6QDWHojjJDDVIbQlk6u/k3SeK633VdZcYM7MTWaMKYOxngh2ertLZOe1X9nAymkLz6hWOHg/TkxsfnIPQnvk=

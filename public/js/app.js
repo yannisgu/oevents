@@ -62,7 +62,8 @@ var App;
                     var queryString = $location.search().queryCategory;
                     if (queryString) {
                         var query = JSON.parse(queryString);
-                        if (JSON.stringify(query) != JSON.stringify(getQuery($scope))) {
+                        if (JSON.stringify(query) != JSON.stringify($scope.query)) {
+                            $scope.query = query;
                             $scope.loading = true;
                             $scope.category = query.category;
 
@@ -86,6 +87,9 @@ var App;
                     $scope.$apply();
                     throw err;
                 }
+
+                console.log(new Date().getTime());
+
                 var persons = _.reduce(res, function (merged, object, index) {
                     var index = object.name + object.yearOfBirth;
                     merged[index] = merged[index] || {
@@ -103,34 +107,14 @@ var App;
                     return merged;
                 }, {});
 
-                if ($scope.fromDate || $scope.toDate) {
-                    res = _.filter(res, function (result) {
-                        var returnValue = true;
-                        if ($scope.fromDate) {
-                            returnValue = returnValue && $scope.fromDate <= result.event.date;
-                        }
-                        if ($scope.toDate) {
-                            returnValue = returnValue && $scope.toDate >= result.event.date;
-                        }
-
-                        return returnValue;
-                    });
-                }
                 var personsArray = [];
 
                 for (var i in persons) {
                     personsArray.push(persons[i]);
                 }
 
-                var groups = [];
+                $scope.persons = personsArray;
 
-                groups.push({
-                    title: "All",
-                    persons: personsArray,
-                    isOpen: true
-                });
-
-                $scope.groups = groups;
                 $scope.$apply();
             });
         }
@@ -151,8 +135,11 @@ var App;
                 });
 
                 function routeUpdate() {
-                    $scope.tabCategoryOpen = true;
-                    $scope.tabPersonOpen = false;
+                    $scope.tabCategoryOpen = $location.search().tab == "category";
+                    console.log("tabCategoryOPen" + $scope.tabCategoryOpen);
+                    $scope.tabPersonOpen = $location.search().tab == "person";
+
+                    console.log("tabPersonOpen" + $scope.tabPersonOpen);
                     $scope.$broadcast("newQuery");
                 }
             }
@@ -169,7 +156,6 @@ var App;
     (function (Controllers) {
         var ResultsByPersonCtrl = (function () {
             function ResultsByPersonCtrl($scope, $location) {
-                $scope.loading = true;
                 $scope.groups = [];
 
                 $scope.$on("newQuery", function () {
@@ -192,7 +178,8 @@ var App;
                     var queryString = $location.search().queryPerson;
                     if (queryString) {
                         var query = JSON.parse(queryString);
-                        if (JSON.stringify(query) != JSON.stringify(getQuery($scope))) {
+                        if (JSON.stringify(query) != JSON.stringify($scope.query)) {
+                            $scope.query = query;
                             $scope.loading = true;
                             $scope.name = query.name;
 
@@ -262,7 +249,7 @@ var App;
                         groups.push({
                             title: i,
                             results: groupObj[i],
-                            isOpen: false
+                            isOpen: true
                         });
                     }
 

@@ -7,7 +7,7 @@ out.log("Begining SOLV Import.");
  
 
 var startYear = 2008;
-var endYear = 2013;
+var endYear = 2008;
 for(var year =  startYear; year <= endYear; year++)
 {
     importYear(year);
@@ -37,11 +37,11 @@ function importYear(year) {
             var result = reg.exec(body);
             var eventsSelect = result[1]
             reg = /<option>(.*)/g*/
-            var reg = /<input type=radio name=event value=".*?"> <a href="(.*?)">/g
+            var reg = /<input type=radio name=event value=".*?"> <a href="(.*?)">(.*)<\/a> (\d| )\d\. .{3,4} \d{4}(.*)/g
            
             var events = new Array();
             while(result = reg.exec(body)){
-                events.push({url: result[1], year: year});
+                events.push({url: result[1], year: year, name: result[4].trim() || result[2]});
             };
             
             async.map(events, importResults, function(err, results){
@@ -111,7 +111,7 @@ function importResults(options, fn) {
                         
                         obj.urlSource= url;
                         obj.source = 'solvResults';
-                        obj.name = res[1] ? res[1].trim() : null;
+                        obj.name = options.name;//res[1] ? res[1].trim() : null;
                         obj.map = res[2] ? res[2].trim() : null;
                         obj.eventCenter = res[3] ? res[3].trim() : null;
                         if(res[4] && res[5] && res[6]){
@@ -128,7 +128,7 @@ function importResults(options, fn) {
                 });
             
             function importResultsOneEvent(id) {
-                var regex = /(?:(?:(\d+)\.)|(?:  )) (.{22}\w*?) (\d\d)  (.{18,}) (.{19,}) (((\d?\d:)?\d\d:\d\d)|.*)/g
+                var regex = /(?:(?:(\d+)\.)|(?:  )) (.{22}\w*?) (\d\d)?  (.{18,}) (.{19,}) (?:(?:(?:(\d?\d):)?(\d?\d):(\d\d))|.*)/g
                 async.map(categories, function(category, categoryFn){
                     dpd.results.get({eventId: id, category: category.name}, function(results, err){
                         //console.log(results)
@@ -138,21 +138,24 @@ function importResults(options, fn) {
                         }
                             var items = [];
                             while(res = regex.exec(category.sourceCode)){
-                                if(!currentItems[res[2].trim()]){
+                                //if(!currentItems[res[2].trim()]){
                                     var resultItem = {
                                         eventId: id,
                                         category: category.name,
                                         name: res[2].trim(),
+                                        club: res[5] ? res[5].trim() : null,
                                         rank: res[1],
                                         yearOfBirth: res[3],
                                     }
                                    items.push(resultItem)
-                                }
+                               // }
                             }
-                            async.map(items, dpd.results.post, function(error, results){
+                            console.log(items)
+                                categoryFn(null, "");
+                            /*async.map(items, dpd.results.post, function(error, results){
                                 categoryFn(null, "");
                                 
-                            } )
+                            } )**/
                          
                     })
                 },

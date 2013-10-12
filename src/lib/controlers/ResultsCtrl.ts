@@ -10,8 +10,11 @@ module App.Controllers{
             });
 
             function routeUpdate() {
-                $scope.tabCategoryOpen = true; //$location.search().tab == "category";
-                $scope.tabPersonOpen = false; //$location.search().tab == "person";
+                $scope.tabCategoryOpen = $location.search().tab == "category";
+                console.log("tabCategoryOPen" + $scope.tabCategoryOpen)
+                $scope.tabPersonOpen = $location.search().tab == "person";
+
+                console.log("tabPersonOpen" + $scope.tabPersonOpen)
                 $scope.$broadcast("newQuery")
 
             }

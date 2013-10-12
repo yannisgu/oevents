@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 var deployd = require('deployd');
-console.log(process.env.OPENSHIFT_APP_NAME);
 
 
 var server = deployd({
@@ -27,7 +26,7 @@ server.on('listening', function() {
 server.on('error', function(err) {
     console.log("error at " + new Date());
     console.error(err);
-    /*process.nextTick(function() { // Give the server a chance to return an error
+    process.nextTick(function() { // Give the server a chance to return an error
         process.exit();
-    });*/
+    });
 });

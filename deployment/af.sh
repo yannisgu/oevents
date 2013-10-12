@@ -13,5 +13,5 @@ rm -r resources/solv-*
 
 npm install --production
 
-af login me@yannisguedel.ch --passwd ""
+af login me@yannisguedel.ch --passwd $AF_PASSWORD
 af update oevents

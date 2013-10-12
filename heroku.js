@@ -1,20 +1,19 @@
 #!/usr/bin/env node
 var deployd = require('deployd');
-console.log(process.env.OPENSHIFT_APP_NAME);
 
 
 var server = deployd({
     port: process.env.PORT || 5000,
     env: process.env.NODE_ENV || 'production',
     db: {
-        host: "widmore.mongohq.com",
-        port: 10010,
+        host: "ds049888.mongolab.com",
+        port: 49888,
         name:  "oevents",
         credentials: {
-            username: "yannisgu",
+            username: "oevents",
             password: process.env.MONGOHQ_PASSWORD
-        }
-    }
+        },
+        options: {auto_reconnect: true}
 });
 
 server.listen();
