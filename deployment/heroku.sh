@@ -32,7 +32,7 @@ git add .
 
 
 heroku git:remote --app oevents
-ssh-keygen -t rsa -N '' -I "deploykey@travis"
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '' -I "deploykey@travis"
 
 chmod 600 ~/.ssh/id_rsa
 heroku keys:add ~/.ssh/id_rsa.pub
