@@ -8,5 +8,6 @@ mkdir packages
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ./deployment/af.sh $DIR
+./deployment/heroku.sh $DIR
 
 

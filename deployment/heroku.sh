@@ -15,14 +15,7 @@ npm install --production
 
 touch ~/.netrc
 
-tee ~/.netrc <<EOF
-machine api.heroku.com
-  login me@yannisguedel.ch
-  password $HEROKU_PASSWORD
-machine code.heroku.com
-  login me@yannisguedel.ch
-  password $HEROKU_PASSWORD
-EOF
+echo "machine api.heroku.com\n login me@yannisguedel.ch\n  password $HEROKU_PASSWORD\n machine code.heroku.com\n  login me@yannisguedel.ch \n  password $HEROKU_PASSWORD" > ~/.netrc
 
 chmod 600 ~/.netrc
 
