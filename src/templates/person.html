@@ -1,0 +1,107 @@
+<div class="people-picker-container">
+    <people-picker on-change="personChanged(val)" person="personId" placeholder="'PERSON_PLACEHOLDER' | translate"></people-picker>
+</div>
+        <!--
+<form class="form-inline">
+    <fieldset>
+
+        <input style="width: 100px" type="text" datepicker-popup="dd.MM.yyyy" ng-model="fromDate" placeholder="From" pattern="\d\d\.\d\d.(\d\d)?\d\d"  title="Enter a valid date" />
+        <input style="width: 100px" type="text" datepicker-popup="dd.MM.yyyy" ng-model="toDate" placeholder="To" pattern="\d\d\.\d\d.(\d\d)?\d\d" title="Enter a valid date" />
+
+        <button type="submit" class="btn btn-default">Search</button>
+
+
+    </fieldset>
+</form>-->
+
+<div ng-show="!loading">
+        <tabset >
+            <tab heading="{{'ALL_RESULTS' | translate}} ({{results.length}})">
+                <resuts-table-by-person results="results"></resuts-table-by-person>
+
+            </tab>
+            <tab heading="{{'BY_YEAR_RESULTS' | translate}}">
+
+                <table class="table">
+                    <tr class="odd">
+                        <th><a ng-click="sortYear('title')">{{'CATEGORY_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortYear('data.results.length')">{{'PARTICIPATIONS_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortYear('data.podiums')">{{'PODIUMS_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortYear('data.victories')">{{'VICTORIES_TITLE' | translate}}</a></th>
+                    </tr>
+                    <tbody ng-repeat="group in yearGroups | orderBy:sortFieldYear">
+                    <tr  ng-click="group.isOpen = !group.isOpen" ng-class="['even', 'odd'][$index %2]">
+                        <td>
+                            <a> {{group.title}}</a>
+                        </td>
+                        <td>
+                            {{group.data.results.length}}
+
+                        </td>
+                        <td>
+                            {{group.data.podiums}}
+
+                        </td>
+                        <td>
+                            {{group.data.victories}}
+
+                        </td>
+                    </tr>
+                    <tr class="no-style-row">
+                        <td colspan="4">
+                            <div collapse="group.isOpen">
+                                <resuts-table-by-person results="group.data.results"></resuts-table-by-person>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </tab>
+            <tab heading="{{'BY_CATEGORY_RESULTS' | translate}}">
+
+                <table class="table">
+                    <tr class="odd">
+                        <th><a ng-click="sortCategory('title')">{{'CATEGORY_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortCategory('data.results.length')">{{'PARTICIPATIONS_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortCategory('data.podiums')">{{'PODIUMS_TITLE' | translate}}</a></th>
+                        <th><a ng-click="sortCategory('data.victories')">{{'VICTORIES_TITLE' | translate}}</a></th>
+                    </tr>
+                    <tbody ng-repeat="group in categoryGroups | orderBy:sortFieldCategory">
+                        <tr  ng-click="group.isOpen = !group.isOpen" ng-class="['even', 'odd'][$index %2]">
+                            <td>
+                               <a> {{group.title}}</a>
+                            </td>
+                            <td>
+                                {{group.data.results.length}}
+
+                            </td>
+                            <td>
+                                {{group.data.podiums}}
+
+                            </td>
+                            <td>
+                                {{group.data.victories}}
+
+                            </td>
+                        </tr>
+                        <tr class="no-style-row">
+                            <td colspan="4">
+                                <div collapse="group.isOpen">
+                                    <resuts-table-by-person results="group.data.results"></resuts-table-by-person>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </tab>
+        </tabset>
+</div>
+        <div ng-show="loading">
+            {{'LOADING' | translate }}
+        </div>
+

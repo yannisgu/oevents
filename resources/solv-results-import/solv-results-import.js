@@ -6,8 +6,8 @@ var ent = require("ent");
 out.log("Begining SOLV Import.");
  
 
-var startYear = 2008;
-var endYear = 2008;
+var startYear = 1997;
+var endYear = 2013;
 for(var year =  startYear; year <= endYear; year++)
 {
     importYear(year);
@@ -27,6 +27,9 @@ function importYear(year) {
     
     request({encoding: null, url: url}, function(error, response, buffer) {
         var body = "";
+        if(!buffer){
+            console.log("buffer is null")
+        }
         for (var ii = 0; ii < buffer.length; ii++) {
                 body += String.fromCharCode( buffer.readUInt8(ii));
         }
@@ -44,7 +47,7 @@ function importYear(year) {
                 events.push({url: result[1], year: year, name: result[4].trim() || result[2]});
             };
             
-            async.map(events, importResults, function(err, results){
+            async.mapSeries(events, importResults, function(err, results){
                 out.log(results)
             });
            
@@ -62,6 +65,9 @@ function importResults(options, fn) {
     var url = solvBase + options.url + "&kind=all";
      request({encoding: null, url: url}, function(error, response, buffer) {
         var body = "";
+        if(!buffer){
+            console.log("buffer 2 is null")
+        }
         for (var ii = 0; ii < buffer.length; ii++) {
                 body += String.fromCharCode( buffer.readUInt8(ii));
         }
@@ -75,7 +81,9 @@ function importResults(options, fn) {
             
         }
         
-        
+        if(!categories){
+            console.log("categories is null")
+        }
         if(categories.length == 0){
            // out.log("error reading result categories: " + options.url)
             fn(null, null);
@@ -105,6 +113,9 @@ function importResults(options, fn) {
                             console.log(err)
                         }
                          var obj = {}
+                         if(!result){
+                             console.log("result is null")
+                         }
                         if(result.length > 0) {
                             obj.id = result[0].id; 
                         }
@@ -119,7 +130,7 @@ function importResults(options, fn) {
                         }
                         //console.log(obj)
                         dpd.events.post(obj, function(res, err) {
-                            importResultsOneEvent(res.id);
+                            importResultsOneEvent(res.id, obj);
                             //fn(null, obj)
                         });
                         
@@ -127,18 +138,21 @@ function importResults(options, fn) {
                     
                 });
             
-            function importResultsOneEvent(id) {
+            function importResultsOneEvent(id, event) {
                 var regex = /(?:(?:(\d+)\.)|(?:  )) (.{22}\w*?) (\d\d)?  (.{18,}) (.{19,}) (?:(?:(?:(\d?\d):)?(\d?\d):(\d\d))|.*)/g
-                async.map(categories, function(category, categoryFn){
+                async.mapSeries(categories, function(category, categoryFn){
                     dpd.results.get({eventId: id, category: category.name}, function(results, err){
+                console.log(event.name + category.name)
                         //console.log(results)
                         var currentItems = {};
+                        if(!results){
+                            console.log("results is null")
+                        }
                         for(var k = 0; k < results.length; k++){
                             currentItems[results[k].name] = 1;
                         }
                             var items = [];
                             while(res = regex.exec(category.sourceCode)){
-                                //if(!currentItems[res[2].trim()]){
                                     var resultItem = {
                                         eventId: id,
                                         category: category.name,
@@ -146,21 +160,44 @@ function importResults(options, fn) {
                                         club: res[5] ? res[5].trim() : null,
                                         rank: res[1],
                                         yearOfBirth: res[3],
+                                        eventName: event.name,
+                                        date: event.date
                                     }
-                                   items.push(resultItem)
-                               // }
+                                    if(!currentItems[resultItem.name]){
+                                        items.push(resultItem)
+                                    }
                             }
                             console.log(items)
-                                categoryFn(null, "");
-                            /*async.map(items, dpd.results.post, function(error, results){
-                                categoryFn(null, "");
+                            async.mapSeries(items, function(item, callback){
+                                dpd.people.get({name: item.name, yearOfBirth: item.yearOfBirth}, function(result, err){
+                                    if(!result){
+                                        console.log("result 2 is null")
+                                    }
+                                    if(result.length <= 0){
+                                        dpd.people.post(item, function(result, err) {
+                                            item.personId = result.id;
+                                            callback(null, item)
+                                        })
+                                    }
+                                    else{
+                                        item.personId = result[0].id;
+                                        callback(null, item);
+                                    }
+                                })
+                            },
+                            function(error, results){
+                            
+                                async.mapSeries(results, dpd.results.post, function(error, results){
+                                    categoryFn(null, "");
                                 
-                            } )**/
+                                 } )
+                            })
+                            
                          
                     })
                 },
                 function(err, results){
-                    fn(null, id);
+                    fn(null, options.name);
                 })
                    
                 

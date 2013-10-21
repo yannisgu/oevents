@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+<div ng-show="isOpen">
+    <table binonce="results" class="table table-striped">
+        <tr>
+            <th><a href="" ng-click="sortEvent('category' )" bo-html="'CATEGORY_TITLE' | translate"></a></th>
+            <th><a href="" ng-click="sortEvent('rank')" bo-html="'RANK_TITLE' | translate"></a></th>
+            <th><a href="" ng-click="sortEvent('name')" bo-html="'NAME_TITLE' | translate"></a></th>
+            <th></th>
+        </tr>
+
+        <tr ng-repeat="result in results  | orderBy:sortFieldEvent">
+            <td>{{result.category}}</td>
+            <td>{{result.rank}}</td>
+            <td>{{result.name}}</td>
+        </tr>
+    </table>
+</div>

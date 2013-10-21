@@ -48,6 +48,30 @@
 			"required": false,
 			"id": "club",
 			"order": 5
+		},
+		"personId": {
+			"name": "personId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "personId",
+			"order": 6
+		},
+		"eventName": {
+			"name": "eventName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "eventName",
+			"order": 7
+		},
+		"date": {
+			"name": "date",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "date",
+			"order": 8
 		}
 	}
 }

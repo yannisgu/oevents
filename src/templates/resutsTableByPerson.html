@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<table class="table table-striped">
+    <tr>
+        <th><a href="" ng-click="sort('event.name')">{{'COMPETITION_TITLE' | translate}}</a></th>
+        <th><a href="" ng-click="sort('event.date')">{{'DATE_TITLE' | translate}}</a></th>
+        <th><a href="" ng-click="sort('event.map')">{{'MAP_TITLE' | translate}}</a></th>
+        <th><a href="" ng-click="sort('category')">{{'CATEGORY_TITLE' | translate}}</a></th>
+        <th><a href="" ng-click="sort('rank')">{{'RANK_TITLE' | translate}}</a></th>
+        <th></th>
+    </tr>
 
-</body>
-</html>
+    <tr ng-repeat="result in results  | orderBy:sortField">
+        <td>
+            <a href="{{result.event.url}}">
+                {{result.eventName}}
+                <span ng-hide="result.event.name">
+                    {{result.event.url}}
+                </span>
+            </a>
+        </td>
+        <td>{{result.date | date:'mediumDate'}}</td>
+        <td>{{result.event.map}}</td>
+        <td>{{result.category}}</td>
+        <td>{{result.rank}}</td>
+    </tr>
+</table>

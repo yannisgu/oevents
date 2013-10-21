@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 0
+		},
+		"yearOfBirth": {
+			"name": "yearOfBirth",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "yearOfBirth",
+			"order": 1
+		},
+		"club": {
+			"name": "club",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "club",
+			"order": 2
+		},
+		"location": {
+			"name": "location",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "location",
+			"order": 3
+		}
+	}
+}

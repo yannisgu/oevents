@@ -1,9 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<div>
+    <form class="form-inline" role="form" ng-submit="search()">
+        <!-- <div class="form-group">
+             <label class="sr-only" for="inputName">Name</label> -->
+        <input type="text" class="form-control" id="inputCategory" placeholder="Enter category" ng-model="category" required>
+        <!-- </div>
+         <div class="form-group">
+             <label class="sr-only" for="yearOfBirth">Year of birth</label> -->
 
-</body>
-</html>
+        <!-- </div>
+         <div class="checkbox">
+             <label class="checkbox">-->
+
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+
+    <div class="results-list">
+        <div ng-hide="loading || !persons">
+
+            <accordion close-others="false">
+                <accordion-group heading="All ({{persons.length}})"  is-open="true">
+                    <table class="table table-striped">
+                        <tr>
+                            <th><a href="" ng-click="sort('name')">Name</a></th>
+                            <th><a href="" ng-click="sort('yearOfBirth')">Year of birth</a></th>
+                            <th><a href="" ng-click="sort('victories')">Victories</a></th>
+                            <th><a href="" ng-click="sort('podiums')">Podiums</a></th>
+                            <th><a href="" ng-click="sort('counts')">Participations</a></th>
+                        </tr>
+
+                        <tr ng-repeat="person in persons   | orderBy:sortField | limitTo:50">
+                            <td>
+                                <a  ng-click="openPerson(person.personId)" >
+                                    {{person.name}}
+                                </a>
+                            </td>
+                            <td>{{person.yearOfBirth}}</td>
+                            <td>{{person.victories}}</td>
+                            <td>{{person.podiums}}</td>
+                            <td>{{person.counts}}</td>
+                        </tr>
+                    </table>
+                </accordion-group>
+            </accordion>
+
+
+        </div>
+        <div ng-show="loading">
+            Loading data...
+        </div>
+    </div>
+
+</div>

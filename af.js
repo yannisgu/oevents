@@ -6,8 +6,8 @@ var server = deployd({
     port: process.VCAP_APP_PORT || 12334,
     env: process.env.NODE_ENV || 'production',
     db: {
-        host: "ds049888.mongolab.com",
-        port: 49888,
+        host: "paulo.mongohq.com",
+        port: 10013,
         name:  "oevents",
         credentials: {
             username: "oevents",

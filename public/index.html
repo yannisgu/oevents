@@ -33,9 +33,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="#">oevents</a>
-            <div class="nav-collapse collapse">
+            <div class="nav-collapse collapse" style="display:  none;" ng-show="true">
                 <ul class="nav">
-                    <li><a href="#/results">Results</a></li>
+                    <li><a href="#/results">{{ 'RESULTS_MENU' | translate }}</a></li>
+                </ul>
+                <ul class="nav">
+                    <li><a href="#/person">{{ 'PERSON_MENU' | translate }}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -57,6 +60,9 @@
 <script src="js/underscore-min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/angular.min.js"></script>
+<script src="js/angular-translate.min.js"></script>
+<script src="js/bindonce.js"></script>
+<script src="js/select2.js"></script>
 <script src="js/ui-bootstrap.js"></script>
 <script src="js/templates.js"></script>
 <script src="js/app.js"></script>

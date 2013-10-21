@@ -1,18 +1,116 @@
 module App.Directives {
 
-    export class ResultsByCategory {
-        templateUrl = 'templates/ResultsByCategory.html';
-        restrict = 'E';
-        scope = {
-        };
-        transclude = true;
+    export interface IResultsByCategoryScope extends ng.IScope {
+        category : String;
+        search : Function;
+        fromDate: Date;
+        toDate: Date;
+        loading : Boolean;
+        sortField: String;
+        sort: Function;
+        openPerson: Function;
+        groups: Array<IGroupCategoryResults>;
+        query: Object;
+    }
 
-        link($scope, element:JQuery, attrs:ng.IAttributes) {
+    interface ICategoryQuery{
+        category : String;
+    }
 
+
+    export interface IGroupCategoryResults {
+        title;
+        persons;
+        isOpen: Boolean;
+    }
+
+
+    export function ResultsByCategory($location){
+        return {
+            templateUrl: 'templates/resultsByCategory.html',
+            restrict: 'E',
+            scope: {
+                "query": "=",
+                "onSearch": '&'
+            },
+            transclude: true,
+
+            link: ($scope, element:JQuery, attrs:ng.IAttributes) => {
+                $scope.sortField = "-counts";
+
+                $scope.openPerson =  (person) => {
+                    $location.path("person").search({person: person });
+                }
+
+                $scope.search =  () => {
+                    $scope.groups = [];
+                    $scope.query = {category: $scope.category.toUpperCase()};
+                    $scope.onSearch({query: $scope.query});
+                    queryData();
+                }
+
+
+
+                $scope.sort = function (field) {
+                    $scope.sortField = $scope.sortField == "-" +  field ? field :  "-" + field;
+                }
+
+                queryData();
+
+                function queryData() {
+                    if($scope.query){
+                        var query:ICategoryQuery = $scope.query;
+
+                        $scope.loading = true;
+                        $scope.category = query.category
+
+                        searchResults(query, $scope);
+                    }
+                }
+            }
         }
     }
+
+    function searchResults(query, $scope) {
+        dpd.results.get(query, function (res, err) {
+            $scope.loading = false;
+            if (err) {
+                $scope.$apply();
+                throw err;
+            }
+
+            console.log(new Date().getTime())
+
+            var persons = _.reduce(res, function (merged, object, index) {
+                var index = object.personId;
+                merged[index] = merged[index] || {
+                    name: object.name ,
+                    personId: object.personId,
+                    yearOfBirth: object.yearOfBirth,
+                    victories: 0,
+                    counts: 0,
+                    podiums: 0
+
+                }
+                if (object.rank == 1) merged[index].victories++;
+                if (_.indexOf([1, 2, 3], object.rank, true) > -1) merged[index].podiums++;
+                merged[index].counts++;
+                return merged;
+            }, {});
+
+            var personsArray = [];
+
+            for (var i in persons) {
+                personsArray.push(persons[i]);
+            }
+
+            $scope.persons = personsArray;
+            $scope.$apply();
+        });
+    }
+
 
 }
 
 
-App.registerDirective('ResultsByCategory', []);
+App.registerDirective('ResultsByCategory', ["$location"]);
