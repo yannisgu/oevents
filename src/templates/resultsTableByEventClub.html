@@ -1,11 +1,9 @@
-
 <div ng-show="isOpen">
     <table binonce="results" class="table table-striped">
         <tr>
             <th><a href="" ng-click="sortEvent('category' )" bo-html="'CATEGORY_TITLE' | translate"></a></th>
             <th><a href="" ng-click="sortEvent('rank')" bo-html="'RANK_TITLE' | translate"></a></th>
             <th><a href="" ng-click="sortEvent('name')" bo-html="'NAME_TITLE' | translate"></a></th>
-            <th></th>
         </tr>
 
         <tr ng-repeat="result in results  | orderBy:sortFieldEvent">

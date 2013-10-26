@@ -24,8 +24,8 @@ module App.Directives {
         isOpen: Boolean;
     }
 
-
-    export function ResultsByCategory($location){
+// db.results.group({key: {personId: 1},cond: {category: "D14"},reduce:  function(curr, res){res.count++; res.name =  curr; return res; } ,initial: {count: 0}})
+    export function ResultsByCategory($location) {
         return {
             templateUrl: 'templates/resultsByCategory.html',
             restrict: 'E',
@@ -37,12 +37,17 @@ module App.Directives {
 
             link: ($scope, element:JQuery, attrs:ng.IAttributes) => {
                 $scope.sortField = "-counts";
+                $scope.limit = 50;
 
-                $scope.openPerson =  (person) => {
+                $scope.openPerson = (person) => {
                     $location.path("person").search({person: person });
                 }
 
-                $scope.search =  () => {
+                $scope.more = function () {
+                    $scope.limit += 50;
+                }
+
+                $scope.search = () => {
                     $scope.groups = [];
                     $scope.query = {category: $scope.category.toUpperCase()};
                     $scope.onSearch({query: $scope.query});
@@ -50,15 +55,14 @@ module App.Directives {
                 }
 
 
-
                 $scope.sort = function (field) {
-                    $scope.sortField = $scope.sortField == "-" +  field ? field :  "-" + field;
+                    $scope.sortField = $scope.sortField == "-" + field ? field : "-" + field;
                 }
 
                 queryData();
 
                 function queryData() {
-                    if($scope.query){
+                    if ($scope.query) {
                         var query:ICategoryQuery = $scope.query;
 
                         $scope.loading = true;
@@ -84,7 +88,7 @@ module App.Directives {
             var persons = _.reduce(res, function (merged, object, index) {
                 var index = object.personId;
                 merged[index] = merged[index] || {
-                    name: object.name ,
+                    name: object.name,
                     personId: object.personId,
                     yearOfBirth: object.yearOfBirth,
                     victories: 0,

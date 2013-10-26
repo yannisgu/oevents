@@ -1,12 +1,15 @@
 <div>
     <form class="form-inline" role="form" ng-submit="search()">
         <input type="text" class="form-control" id="inputClub" placeholder="{{'CLUB_PLACEHOLDER' | translate}}" ng-model="club" required>
-        <select ng-model="selectedYear" ng-options="year for year in years">
+        <select ng-model="selectedYear" ng-options="year.key as year.value for year in years">
         </select>
         <button type="submit" class="btn btn-default">Search</button>
     </form>
-    <div class="results-list">
-            <table class="table">
+    <div ng-show="!loading && query != '' && events.length == 0">Keine Resultate für "{{query.club}}" in der
+        ausgewählten Zeitspanne
+    </div>
+    <div class="results-list" ng-hide="loading || !events || events.length == 0">
+        <table class="table">
                 <tr class="odd">
                     <th><a ng-click="sort('title')">{{'COMPETITION_TITLE' | translate}}</a></th>
                     <th><a ng-click="sort('data.date')">{{'DATE_TITLE' | translate}}</a></th>
@@ -33,9 +36,9 @@
                     </td>
                 </tr>
                 <tr class="no-style-row">
-                    <td colspan="4">
+                    <td colspan="5">
 
-                            <results-table-by-event-club  is-open="group.isOpen" results="group.data.results"></results-table-by-event-club>
+                    <results-table-by-event-club  is-open="group.isOpen" results="group.data.results"></results-table-by-event-club>
 
                     </td>
                 </tr>
@@ -43,10 +46,10 @@
 
             </table>
 
+    </div>
 
 
-
-        <div ng-show="loading">
-            Loading data...
-        </div>
+    <div ng-show="loading">
+        {{'LOADING' | translate }}
+    </div>
 </div>

@@ -403,9 +403,14 @@ var App;
                 transclude: true,
                 link: function ($scope, element, attrs) {
                     $scope.sortField = "-counts";
+                    $scope.limit = 50;
 
                     $scope.openPerson = function (person) {
                         $location.path("person").search({ person: person });
+                    };
+
+                    $scope.more = function () {
+                        $scope.limit += 50;
                     };
 
                     $scope.search = function () {
@@ -493,10 +498,11 @@ var App;
                 transclude: true,
                 link: function ($scope, element, attrs) {
                     $scope.years = [];
-                    for (var i = 1997; i < 2014; i++) {
-                        $scope.years.push(i);
+                    for (var i = 1997; i <= (new Date()).getFullYear(); i++) {
+                        $scope.years.push({ key: i, value: i });
                     }
-                    $scope.selectedYear = $scope.years[$scope.years.length - 1];
+                    $scope.years.push({ key: "all", value: "Alle" });
+                    $scope.selectedYear = $scope.years[$scope.years.length - 2].key;
 
                     $scope.sortFieldEvent = [];
                     $scope.sortField = "data.date";
@@ -506,12 +512,15 @@ var App;
                         if ($scope.query.selectedYear) {
                             $scope.selectedYear = $scope.query.selectedYear;
                         }
+                        $scope.loading = true;
                         searchResults();
                     }
 
                     $scope.search = function () {
-                        $scope.query = { club: $scope.club, selectedYear: $scope.selectedYear };
+                        $scope.query = { club: $scope.club };
+                        $scope.query.selectedYear = $scope.selectedYear;
                         $scope.onSearch({ query: $scope.query });
+                        $scope.loading = true;
                         searchResults();
                     };
 
@@ -521,12 +530,15 @@ var App;
 
                     function searchResults() {
                         var query = $scope.query;
-                        query.date = {
-                            $gte: new Date($scope.selectedYear, 0, 1).getTime(),
-                            $lte: new Date($scope.selectedYear, 11, 31).getTime()
-                        };
+                        if ($scope.selectedYear != "all") {
+                            query.date = {
+                                $gte: new Date($scope.selectedYear, 0, 1).getTime(),
+                                $lte: new Date($scope.selectedYear, 11, 31).getTime()
+                            };
+                        }
 
                         dpd.results.get($scope.query, function (entries, error) {
+                            $scope.loading = false;
                             console.log((new Date()).getTime());
 
                             entries = _.map(entries, function (result) {
@@ -551,6 +563,7 @@ var App;
             };
         }
         Directives.ResultsByClub = ResultsByClub;
+
         function groupResultyBy(results, groupFunction) {
             var groupsObj = _.reduce(results, function (merged, object, index) {
                 var index = groupFunction(object);
@@ -642,7 +655,7 @@ App.registerTranslation('de', {
     INDEX_TITLE: 'Willkommen auf oevents',
     PERSON_PLACEHOLDER: 'Läufer suchen',
     CATEGORY_TITLE: 'Kategorie',
-    ALL_RESULTS: 'Alle',
+    ALL: 'Alle',
     BY_YEAR_RESULTS: 'Nach Jahr',
     PARTICIPATIONS_TITLE: 'Teilnahmen',
     PODIUMS_TITLE: 'Podeste',
@@ -653,6 +666,17 @@ App.registerTranslation('de', {
     RANK_TITLE: 'Rang',
     COMPETITION_TITLE: 'Wettkampf',
     RESULTS_MENU: 'Resultate',
-    PERSON_MENU: 'Person'
+    PERSON_MENU: 'Person',
+    TAB_CATEGORY: 'Nach Kategorie',
+    TAB_CLUB: 'Nach Verein',
+    TAB_PERSON: 'Person suchen',
+    SEARCH_PERSON: 'Person suchen',
+    CLUB_PLACEHOLDER: 'Verein eingeben',
+    LOADING: 'Daten laden...',
+    OPTION_ALL: 'Alle',
+    CATEGORY_PLACEHOLDER: "Kategorien eingeben",
+    SEARCH: "Suchen",
+    YOB_TITLE: "Jahrgang",
+    NAME_TITLE: 'Name'
 });
 //# sourceMappingURL=file:////Users/yannisgu/Documents/Development/projects/oevents/public/js/app.js.map

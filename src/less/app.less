@@ -4,22 +4,43 @@ body {
   padding-top: @topBarHeight;
 }
 
-.nav, .pagination, a { cursor: pointer; }
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+
+  }
+
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 0px;
+  }
+
+  .nav-bar {
+    margin-left: -20px;
+    margin-right: -20px;
+
+  }
+}
+
+.nav, .pagination, a {
+  cursor: pointer;
+}
 
 .nav-tabs {
   margin-bottom: 15px;
 }
 
-
 .odd td, .odd th {
   background-color: #f9f9f9;
 }
 
-
 tr.no-style-row {
   border-spacing: 0px;
 }
-.no-style-row > td{
+
+.no-style-row > td {
   padding: 0px;
   border: 0px;
 }

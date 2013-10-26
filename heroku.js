@@ -14,7 +14,7 @@ var server = deployd({
             password: process.env.MONGOHQ_PASSWORD
         },
         options: {auto_reconnect: true}
-});
+    }});
 
 server.listen();
 

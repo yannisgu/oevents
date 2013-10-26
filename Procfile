@@ -1,1 +1,1 @@
-web: DEBUG=* node heroku.js
+web: node heroku.js

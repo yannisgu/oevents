@@ -2,7 +2,7 @@ App.registerTranslation( 'de', {
     INDEX_TITLE:  'Willkommen auf oevents',
     PERSON_PLACEHOLDER: 'Läufer suchen',
     CATEGORY_TITLE: 'Kategorie',
-    ALL_RESULTS: 'Alle',
+    ALL: 'Alle',
     BY_YEAR_RESULTS: 'Nach Jahr',
     PARTICIPATIONS_TITLE: 'Teilnahmen',
     PODIUMS_TITLE: 'Podeste',
@@ -13,5 +13,17 @@ App.registerTranslation( 'de', {
     RANK_TITLE: 'Rang',
     COMPETITION_TITLE: 'Wettkampf',
     RESULTS_MENU: 'Resultate',
-    PERSON_MENU: 'Person'
+    PERSON_MENU: 'Person',
+    TAB_CATEGORY: 'Nach Kategorie',
+    TAB_CLUB: 'Nach Verein',
+    TAB_PERSON: 'Person suchen',
+    SEARCH_PERSON: 'Person suchen',
+    CLUB_PLACEHOLDER: 'Verein eingeben',
+    LOADING: 'Daten laden...',
+    OPTION_ALL: 'Alle',
+    CATEGORY_PLACEHOLDER: "Kategorien eingeben",
+    SEARCH: "Suchen",
+    YOB_TITLE: "Jahrgang",
+
+    NAME_TITLE: 'Name'
 });

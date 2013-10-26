@@ -16,8 +16,8 @@
 
 <div ng-show="!loading">
         <tabset >
-            <tab heading="{{'ALL_RESULTS' | translate}} ({{results.length}})">
-                <resuts-table-by-person results="results"></resuts-table-by-person>
+            <tab heading="{{'ALL' | translate}} ({{results.length}})">
+            <resuts-table-by-person results="results"></resuts-table-by-person>
 
             </tab>
             <tab heading="{{'BY_YEAR_RESULTS' | translate}}">
@@ -101,7 +101,7 @@
             </tab>
         </tabset>
 </div>
-        <div ng-show="loading">
-            {{'LOADING' | translate }}
-        </div>
+<div ng-show="loading">
+    {{'LOADING' | translate }}
+</div>
 

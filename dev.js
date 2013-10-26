@@ -6,12 +6,12 @@ var server = deployd({
     port: process.env.PORT || 5000,
     env: process.env.NODE_ENV || 'development',
     db: {
-        host: "widmore.mongohq.com",
-        port: 10010,
-        name:  "oevents_test2",
+        host: "paulo.mongohq.com",
+        port: 10013,
+        name: "oevents",
         credentials: {
-            username: "oevents_test2",
-            password: "oevents_test2"
+            username: "oevents",
+            password: "0events1"
         }
     }});
 

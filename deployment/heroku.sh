@@ -3,6 +3,7 @@ dir="$1"
 echo $dir
 mkdir $dir/packages/heroku
 cp $dir/heroku.js $dir/packages/heroku
+cp $dir/Procfile $dir/packages/heroku
 cp $dir/package.json $dir/packages/heroku
 cp -r $dir/public $dir/packages/heroku
 cp -r $dir/resources $dir/packages/heroku

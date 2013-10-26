@@ -34,8 +34,8 @@ angular.module("templates/person.html", []).run(["$templateCache", function($tem
     "\n" +
     "<div ng-show=\"!loading\">\n" +
     "        <tabset >\n" +
-    "            <tab heading=\"{{'ALL_RESULTS' | translate}} ({{results.length}})\">\n" +
-    "                <resuts-table-by-person results=\"results\"></resuts-table-by-person>\n" +
+    "            <tab heading=\"{{'ALL' | translate}} ({{results.length}})\">\n" +
+    "            <resuts-table-by-person results=\"results\"></resuts-table-by-person>\n" +
     "\n" +
     "            </tab>\n" +
     "            <tab heading=\"{{'BY_YEAR_RESULTS' | translate}}\">\n" +
@@ -119,9 +119,9 @@ angular.module("templates/person.html", []).run(["$templateCache", function($tem
     "            </tab>\n" +
     "        </tabset>\n" +
     "</div>\n" +
-    "        <div ng-show=\"loading\">\n" +
-    "            {{'LOADING' | translate }}\n" +
-    "        </div>\n" +
+    "<div ng-show=\"loading\">\n" +
+    "    {{'LOADING' | translate }}\n" +
+    "</div>\n" +
     "\n" +
     "");
 }]);
@@ -148,7 +148,8 @@ angular.module("templates/results.html", []).run(["$templateCache", function($te
     "\n" +
     "        </tab>\n" +
     "    </tabset>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/resultsByCategory.html", []).run(["$templateCache", function($templateCache) {
@@ -157,7 +158,8 @@ angular.module("templates/resultsByCategory.html", []).run(["$templateCache", fu
     "    <form class=\"form-inline\" role=\"form\" ng-submit=\"search()\">\n" +
     "        <!-- <div class=\"form-group\">\n" +
     "             <label class=\"sr-only\" for=\"inputName\">Name</label> -->\n" +
-    "        <input type=\"text\" class=\"form-control\" id=\"inputCategory\" placeholder=\"Enter category\" ng-model=\"category\" required>\n" +
+    "        <input type=\"text\" class=\"form-control\" id=\"inputCategory\" placeholder=\"{{'CATEGORY_PLACEHOLDER' | translate}}\"\n" +
+    "               ng-model=\"category\" required>\n" +
     "        <!-- </div>\n" +
     "         <div class=\"form-group\">\n" +
     "             <label class=\"sr-only\" for=\"yearOfBirth\">Year of birth</label> -->\n" +
@@ -166,26 +168,26 @@ angular.module("templates/resultsByCategory.html", []).run(["$templateCache", fu
     "         <div class=\"checkbox\">\n" +
     "             <label class=\"checkbox\">-->\n" +
     "\n" +
-    "        <button type=\"submit\" class=\"btn btn-default\">Search</button>\n" +
+    "        <button type=\"submit\" class=\"btn btn-default\">{{'SEARCH' | translate}}</button>\n" +
     "    </form>\n" +
     "\n" +
     "    <div class=\"results-list\">\n" +
     "        <div ng-hide=\"loading || !persons\">\n" +
     "\n" +
     "            <accordion close-others=\"false\">\n" +
-    "                <accordion-group heading=\"All ({{persons.length}})\"  is-open=\"true\">\n" +
+    "                <accordion-group heading=\"{{'ALL' | translate}} ({{persons.length}})\" is-open=\"true\">\n" +
     "                    <table class=\"table table-striped\">\n" +
     "                        <tr>\n" +
-    "                            <th><a href=\"\" ng-click=\"sort('name')\">Name</a></th>\n" +
-    "                            <th><a href=\"\" ng-click=\"sort('yearOfBirth')\">Year of birth</a></th>\n" +
-    "                            <th><a href=\"\" ng-click=\"sort('victories')\">Victories</a></th>\n" +
-    "                            <th><a href=\"\" ng-click=\"sort('podiums')\">Podiums</a></th>\n" +
-    "                            <th><a href=\"\" ng-click=\"sort('counts')\">Participations</a></th>\n" +
+    "                            <th><a href=\"\" ng-click=\"sort('name')\">{{'NAME_TITLE' | translate}} </a></th>\n" +
+    "                            <th><a href=\"\" ng-click=\"sort('yearOfBirth')\">{{'YOB_TITLE' | translate}}</a></th>\n" +
+    "                            <th><a href=\"\" ng-click=\"sort('victories')\">{{'VICTORIES_TITLE' | translate}}</a></th>\n" +
+    "                            <th><a href=\"\" ng-click=\"sort('podiums')\">{{'PODIUMS_TITLE' | translate}}</a></th>\n" +
+    "                            <th><a href=\"\" ng-click=\"sort('counts')\">{{'PARTICIPATIONS_TITLE' | translate}}</a></th>\n" +
     "                        </tr>\n" +
     "\n" +
-    "                        <tr ng-repeat=\"person in persons   | orderBy:sortField | limitTo:50\">\n" +
+    "                        <tr ng-repeat=\"person in persons   | orderBy:sortField | limitTo:limit\">\n" +
     "                            <td>\n" +
-    "                                <a  ng-click=\"openPerson(person.personId)\" >\n" +
+    "                                <a ng-click=\"openPerson(person.personId)\">\n" +
     "                                    {{person.name}}\n" +
     "                                </a>\n" +
     "                            </td>\n" +
@@ -195,13 +197,16 @@ angular.module("templates/resultsByCategory.html", []).run(["$templateCache", fu
     "                            <td>{{person.counts}}</td>\n" +
     "                        </tr>\n" +
     "                    </table>\n" +
+    "                    <div ng-hide=\"persons.length < limit\">\n" +
+    "                        <a ng-click=\"more()\">Mehr...</a>\n" +
+    "                    </div>\n" +
     "                </accordion-group>\n" +
     "            </accordion>\n" +
     "\n" +
     "\n" +
     "        </div>\n" +
     "        <div ng-show=\"loading\">\n" +
-    "            Loading data...\n" +
+    "            {{'LOADING' | translate }}\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -213,12 +218,15 @@ angular.module("templates/resultsByClub.html", []).run(["$templateCache", functi
     "<div>\n" +
     "    <form class=\"form-inline\" role=\"form\" ng-submit=\"search()\">\n" +
     "        <input type=\"text\" class=\"form-control\" id=\"inputClub\" placeholder=\"{{'CLUB_PLACEHOLDER' | translate}}\" ng-model=\"club\" required>\n" +
-    "        <select ng-model=\"selectedYear\" ng-options=\"year for year in years\">\n" +
+    "        <select ng-model=\"selectedYear\" ng-options=\"year.key as year.value for year in years\">\n" +
     "        </select>\n" +
     "        <button type=\"submit\" class=\"btn btn-default\">Search</button>\n" +
     "    </form>\n" +
-    "    <div class=\"results-list\">\n" +
-    "            <table class=\"table\">\n" +
+    "    <div ng-show=\"!loading && query != '' && events.length == 0\">Keine Resultate für \"{{query.club}}\" in der\n" +
+    "        ausgewählten Zeitspanne\n" +
+    "    </div>\n" +
+    "    <div class=\"results-list\" ng-hide=\"loading || !events || events.length == 0\">\n" +
+    "        <table class=\"table\">\n" +
     "                <tr class=\"odd\">\n" +
     "                    <th><a ng-click=\"sort('title')\">{{'COMPETITION_TITLE' | translate}}</a></th>\n" +
     "                    <th><a ng-click=\"sort('data.date')\">{{'DATE_TITLE' | translate}}</a></th>\n" +
@@ -245,9 +253,9 @@ angular.module("templates/resultsByClub.html", []).run(["$templateCache", functi
     "                    </td>\n" +
     "                </tr>\n" +
     "                <tr class=\"no-style-row\">\n" +
-    "                    <td colspan=\"4\">\n" +
+    "                    <td colspan=\"5\">\n" +
     "\n" +
-    "                            <results-table-by-event-club  is-open=\"group.isOpen\" results=\"group.data.results\"></results-table-by-event-club>\n" +
+    "                    <results-table-by-event-club  is-open=\"group.isOpen\" results=\"group.data.results\"></results-table-by-event-club>\n" +
     "\n" +
     "                    </td>\n" +
     "                </tr>\n" +
@@ -255,25 +263,23 @@ angular.module("templates/resultsByClub.html", []).run(["$templateCache", functi
     "\n" +
     "            </table>\n" +
     "\n" +
+    "    </div>\n" +
     "\n" +
     "\n" +
-    "\n" +
-    "        <div ng-show=\"loading\">\n" +
-    "            Loading data...\n" +
-    "        </div>\n" +
+    "    <div ng-show=\"loading\">\n" +
+    "        {{'LOADING' | translate }}\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 
 angular.module("templates/resultsTableByEventClub.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/resultsTableByEventClub.html",
-    "\n" +
     "<div ng-show=\"isOpen\">\n" +
     "    <table binonce=\"results\" class=\"table table-striped\">\n" +
     "        <tr>\n" +
     "            <th><a href=\"\" ng-click=\"sortEvent('category' )\" bo-html=\"'CATEGORY_TITLE' | translate\"></a></th>\n" +
     "            <th><a href=\"\" ng-click=\"sortEvent('rank')\" bo-html=\"'RANK_TITLE' | translate\"></a></th>\n" +
     "            <th><a href=\"\" ng-click=\"sortEvent('name')\" bo-html=\"'NAME_TITLE' | translate\"></a></th>\n" +
-    "            <th></th>\n" +
     "        </tr>\n" +
     "\n" +
     "        <tr ng-repeat=\"result in results  | orderBy:sortFieldEvent\">\n" +
@@ -295,7 +301,7 @@ angular.module("templates/resutsTableByPerson.html", []).run(["$templateCache", 
     "        <th><a href=\"\" ng-click=\"sort('event.map')\">{{'MAP_TITLE' | translate}}</a></th>\n" +
     "        <th><a href=\"\" ng-click=\"sort('category')\">{{'CATEGORY_TITLE' | translate}}</a></th>\n" +
     "        <th><a href=\"\" ng-click=\"sort('rank')\">{{'RANK_TITLE' | translate}}</a></th>\n" +
-    "        <th></th>\n" +
+    "\n" +
     "    </tr>\n" +
     "\n" +
     "    <tr ng-repeat=\"result in results  | orderBy:sortField\">\n" +
