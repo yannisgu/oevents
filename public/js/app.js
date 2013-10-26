@@ -2,20 +2,20 @@ angular.module('app.controllers', []);
 angular.module('app.directives', []);
 
 angular.module('app', ["templates-main", "app.controllers", "app.directives", "ui.bootstrap", "pascalprecht.translate", 'pasvaz.bindonce']).config([
-    '$routeProvider',
-    function ($routeProvider) {
-        $routeProvider.when('/index', { templateUrl: 'templates/index.html', controller: "IndexCtrl" }).when('/results', { templateUrl: 'templates/results.html', controller: "ResultsCtrl", reloadOnSearch: false }).when('/person', { templateUrl: 'templates/person.html', controller: "PersonCtrl", reloadOnSearch: false }).otherwise({ redirectTo: '/index' });
-    }
-]).config([
-    '$translateProvider',
-    function ($translateProvider) {
-        var userlang = navigator.language || navigator.userLanguage;
-        if (userlang && userlang.length > 1) {
-            $translateProvider.preferredLanguage(userlang.substring(0, 2));
+        '$routeProvider',
+        function ($routeProvider) {
+            $routeProvider.when('/index', { templateUrl: 'templates/index.html', controller: "IndexCtrl" }).when('/results', { templateUrl: 'templates/results.html', controller: "ResultsCtrl", reloadOnSearch: false }).when('/person', { templateUrl: 'templates/person.html', controller: "PersonCtrl", reloadOnSearch: false }).otherwise({ redirectTo: '/index' });
         }
-        $translateProvider.fallbackLanguage("de");
-    }
-]);
+    ]).config([
+        '$translateProvider',
+        function ($translateProvider) {
+            var userlang = navigator.language || navigator.userLanguage;
+            if (userlang && userlang.length > 1) {
+                $translateProvider.preferredLanguage(userlang.substring(0, 2));
+            }
+            $translateProvider.fallbackLanguage("de");
+        }
+    ]);
 ;
 
 var App;
@@ -25,19 +25,25 @@ var App;
     ;
 
     function registerController(className, services) {
-        if (typeof services === "undefined") { services = []; }
+        if (typeof services === "undefined") {
+            services = [];
+        }
         var controller = 'app.controllers.' + className;
         services.push(App.Controllers[className]);
         angular.module('app.controllers').controller(className, services);
     }
+
     App.registerController = registerController;
 
     function registerDirective(className, services) {
-        if (typeof services === "undefined") { services = []; }
+        if (typeof services === "undefined") {
+            services = [];
+        }
         var directive = className[0].toLowerCase() + className.slice(1);
         services.push(App.Directives[className]);
         angular.module('app.directives').directive(directive, services);
     }
+
     App.registerDirective = registerDirective;
 
     function registerTranslation(language, strings) {
@@ -48,6 +54,7 @@ var App;
             }
         ]);
     }
+
     App.registerTranslation = registerTranslation;
 })(App || (App = {}));
 var App;
@@ -56,6 +63,7 @@ var App;
         var IndexCtrl = (function () {
             function IndexCtrl($scope) {
             }
+
             return IndexCtrl;
         })();
         Controllers.IndexCtrl = IndexCtrl;
@@ -120,6 +128,7 @@ var App;
                     });
                 }
             }
+
             return PersonCtrl;
         })();
         Controllers.PersonCtrl = PersonCtrl;
@@ -196,6 +205,7 @@ var App;
                     }
                 }
             }
+
             return ResultsCtrl;
         })();
         Controllers.ResultsCtrl = ResultsCtrl;
@@ -243,6 +253,7 @@ var App;
                     }
                 }
             }
+
             return ResultsByPersonCtrl;
         })();
         Controllers.ResultsByPersonCtrl = ResultsByPersonCtrl;
@@ -327,6 +338,7 @@ App.registerController("ResultsByPersonCtrl", ["$scope", "$location"]);
 var App;
 (function (App) {
     (function (Directives) {
+        Directives.PepoplePickerCache = {};
         function PeoplePicker() {
             return {
                 templateUrl: 'templates/peoplePicker.html',
@@ -356,33 +368,53 @@ var App;
                         placeholder: $scope.placeholder,
                         query: function (query) {
                             var terms = query.term.split(" ");
+                            var data = {
+                                results: []
+                            };
                             var queries = [];
                             for (var i = 0; i < terms.length; i++) {
                                 queries.push({ name: { "$regex": terms[i], $options: 'i' } });
                             }
 
-                            dpd.people.get({ "$and": queries }, function (res, err) {
-                                var data = {
-                                    results: []
-                                };
-                                for (var i = 0; i < res.length && i < 10; i++) {
-                                    console.log(res[i].id);
-                                    data.results.push({ id: res[i].id, text: res[i].name + (res[i].yearOfBirth ? ", " + res[i].yearOfBirth : "") });
+                            var cache = App.Directives.PepoplePickerCache[query.term.substring(0, 3)];
+                            if (cache) {
+                                for (var i = 0; i < cache.length; i++) {
+                                    var value = cache[i];
+                                    var match = true;
+                                    for (var j = 0; j < terms.length; j++) {
+                                        if (!value.name.match(new RegExp(terms[j], "i"))) {
+                                            match = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (match) {
+                                        data.results.push({ id: value.id, text: value.name + (value.yearOfBirth ? ", " + value.yearOfBirth : "") });
+                                    }
                                 }
                                 query.callback(data);
-                            });
+                            } else {
+                                dpd.people.get({ "$and": queries }, function (res, err) {
+                                    App.Directives.PepoplePickerCache[query.term] = res;
+                                    for (var i = 0; i < res.length && i < 10; i++) {
+                                        data.results.push({ id: res[i].id, text: res[i].name + (res[i].yearOfBirth ? ", " + res[i].yearOfBirth : "") });
+                                    }
+                                    query.callback(data);
+                                });
+                            }
                         }
                     }).on("change", function (e) {
-                        $scope.person = e.val;
-                        $scope.$apply();
-                        console.log(e);
-                        if ($scope.onChange) {
-                            $scope.onChange({ val: e.val });
-                        }
-                    });
+                            $scope.person = e.val;
+                            $scope.$apply();
+                            console.log(e);
+                            if ($scope.onChange) {
+                                $scope.onChange({ val: e.val });
+                            }
+                        });
                 }
             };
         }
+
         Directives.PeoplePicker = PeoplePicker;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;
@@ -439,9 +471,12 @@ var App;
                 }
             };
         }
+
         Directives.ResultsByCategory = ResultsByCategory;
 
         function searchResults(query, $scope) {
+            query.$fields = { personId: 1, name: 1, yearOfBirth: 1, rank: 1 };
+
             dpd.results.get(query, function (res, err) {
                 $scope.loading = false;
                 if (err) {
@@ -529,15 +564,15 @@ var App;
                     };
 
                     function searchResults() {
-                        var query = $scope.query;
+                        var query = { club: { "$regex": $scope.club, $options: 'i' }, date: null };
+
                         if ($scope.selectedYear != "all") {
                             query.date = {
                                 $gte: new Date($scope.selectedYear, 0, 1).getTime(),
                                 $lte: new Date($scope.selectedYear, 11, 31).getTime()
                             };
                         }
-
-                        dpd.results.get($scope.query, function (entries, error) {
+                        dpd.results.get(query, function (entries, error) {
                             $scope.loading = false;
                             console.log((new Date()).getTime());
 
@@ -562,6 +597,7 @@ var App;
                 }
             };
         }
+
         Directives.ResultsByClub = ResultsByClub;
 
         function groupResultyBy(results, groupFunction) {
@@ -619,6 +655,7 @@ var App;
                 }
             };
         }
+
         Directives.ResultsTableByEventClub = ResultsTableByEventClub;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;
@@ -645,6 +682,7 @@ var App;
                 }
             };
         }
+
         Directives.ResutsTableByPerson = ResutsTableByPerson;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;

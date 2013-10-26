@@ -1,4 +1,5 @@
 module App.Directives {
+    export var PepoplePickerCache = {};
 
     export function PeoplePicker() {
         return{
@@ -33,21 +34,45 @@ module App.Directives {
                 placeholder: $scope.placeholder,
                 query: function (query) {
                     var terms = query.term.split(" ");
+                    var data = {
+                        results: []
+                    };
                     var queries = [];
                     for(var i = 0; i < terms.length; i++){
                         queries.push({name: {"$regex": terms[i], $options: 'i'}})
                     }
 
-                    dpd.people.get({"$and": queries}, function(res, err){
-                        var data = {
-                            results: []
-                        };
-                        for(var i = 0; i < res.length && i < 10; i++){
-                            console.log(res[i].id)
-                            data.results.push({id: res[i].id, text: res[i].name + (res[i].yearOfBirth ?  ", " + res[i].yearOfBirth : "")});
+                    var cache = App.Directives.PepoplePickerCache[query.term.substring(0, 3)];
+                    if (cache) {
+                        for (var i = 0; i < cache.length; i++) {
+                            var value = cache[i];
+                            var match = true;
+                            for (var j = 0; j < terms.length; j++) {
+                                if (!value.name.match(new RegExp(terms[j], "i"))) {
+                                    match = false;
+                                    break;
+                                }
+
+                            }
+
+                            if (match) {
+                                data.results.push({id: value.id, text: value.name + (value.yearOfBirth ? ", " + value.yearOfBirth : "")});
+
+                            }
                         }
                         query.callback(data);
-                    })
+                    }
+                    else {
+                        dpd.people.get({"$and": queries}, function (res, err) {
+                            App.Directives.PepoplePickerCache[query.term] = res;
+                            for (var i = 0; i < res.length && i < 10; i++) {
+                                data.results.push({id: res[i].id, text: res[i].name + (res[i].yearOfBirth ? ", " + res[i].yearOfBirth : "")});
+                            }
+                            query.callback(data);
+                        })
+
+                    }
+
 
                 }
             })

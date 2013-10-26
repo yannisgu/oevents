@@ -45,15 +45,15 @@ module App.Directives {
 
 
                 function searchResults() {
-                    var query = $scope.query;
+                    var query = {club: {"$regex": $scope.club, $options: 'i'}, date: null };
+
                     if ($scope.selectedYear != "all") {
                         query.date = {
                             $gte: new Date($scope.selectedYear, 0, 1).getTime(),
                             $lte: new Date($scope.selectedYear, 11, 31).getTime()
                         }
                     }
-
-                    dpd.results.get($scope.query, function (entries, error) {
+                    dpd.results.get(query, function (entries, error) {
                         $scope.loading = false;
                         console.log((new Date).getTime())
 

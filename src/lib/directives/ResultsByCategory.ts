@@ -76,6 +76,9 @@ module App.Directives {
     }
 
     function searchResults(query, $scope) {
+
+        query.$fields = {personId: 1, name: 1, yearOfBirth: 1, rank: 1};
+
         dpd.results.get(query, function (res, err) {
             $scope.loading = false;
             if (err) {
