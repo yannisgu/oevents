@@ -9,7 +9,7 @@ cp -r $dir/resources $dir/packages/af
 
 cd $dir/packages/af
 
-#rm -r resources/solv-*
+rm -r resources/solv-*
 
 npm install --production
 

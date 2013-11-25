@@ -2,20 +2,20 @@ angular.module('app.controllers', []);
 angular.module('app.directives', []);
 
 angular.module('app', ["templates-main", "app.controllers", "app.directives", "ui.bootstrap", "pascalprecht.translate", 'pasvaz.bindonce']).config([
-        '$routeProvider',
-        function ($routeProvider) {
-            $routeProvider.when('/index', { templateUrl: 'templates/index.html', controller: "IndexCtrl" }).when('/results', { templateUrl: 'templates/results.html', controller: "ResultsCtrl", reloadOnSearch: false }).when('/person', { templateUrl: 'templates/person.html', controller: "PersonCtrl", reloadOnSearch: false }).otherwise({ redirectTo: '/index' });
+    '$routeProvider',
+    function ($routeProvider) {
+        $routeProvider.when('/index', { templateUrl: 'templates/index.html', controller: "IndexCtrl" }).when('/results', { templateUrl: 'templates/results.html', controller: "ResultsCtrl", reloadOnSearch: false }).when('/person', { templateUrl: 'templates/person.html', controller: "PersonCtrl", reloadOnSearch: false }).otherwise({ redirectTo: '/index' });
+    }
+]).config([
+    '$translateProvider',
+    function ($translateProvider) {
+        var userlang = navigator.language || navigator.userLanguage;
+        if (userlang && userlang.length > 1) {
+            $translateProvider.preferredLanguage(userlang.substring(0, 2));
         }
-    ]).config([
-        '$translateProvider',
-        function ($translateProvider) {
-            var userlang = navigator.language || navigator.userLanguage;
-            if (userlang && userlang.length > 1) {
-                $translateProvider.preferredLanguage(userlang.substring(0, 2));
-            }
-            $translateProvider.fallbackLanguage("de");
-        }
-    ]);
+        $translateProvider.fallbackLanguage("de");
+    }
+]);
 ;
 
 var App;
@@ -25,25 +25,19 @@ var App;
     ;
 
     function registerController(className, services) {
-        if (typeof services === "undefined") {
-            services = [];
-        }
+        if (typeof services === "undefined") { services = []; }
         var controller = 'app.controllers.' + className;
         services.push(App.Controllers[className]);
         angular.module('app.controllers').controller(className, services);
     }
-
     App.registerController = registerController;
 
     function registerDirective(className, services) {
-        if (typeof services === "undefined") {
-            services = [];
-        }
+        if (typeof services === "undefined") { services = []; }
         var directive = className[0].toLowerCase() + className.slice(1);
         services.push(App.Directives[className]);
         angular.module('app.directives').directive(directive, services);
     }
-
     App.registerDirective = registerDirective;
 
     function registerTranslation(language, strings) {
@@ -54,7 +48,6 @@ var App;
             }
         ]);
     }
-
     App.registerTranslation = registerTranslation;
 })(App || (App = {}));
 var App;
@@ -63,7 +56,6 @@ var App;
         var IndexCtrl = (function () {
             function IndexCtrl($scope) {
             }
-
             return IndexCtrl;
         })();
         Controllers.IndexCtrl = IndexCtrl;
@@ -128,7 +120,6 @@ var App;
                     });
                 }
             }
-
             return PersonCtrl;
         })();
         Controllers.PersonCtrl = PersonCtrl;
@@ -205,7 +196,6 @@ var App;
                     }
                 }
             }
-
             return ResultsCtrl;
         })();
         Controllers.ResultsCtrl = ResultsCtrl;
@@ -253,7 +243,6 @@ var App;
                     }
                 }
             }
-
             return ResultsByPersonCtrl;
         })();
         Controllers.ResultsByPersonCtrl = ResultsByPersonCtrl;
@@ -339,6 +328,7 @@ var App;
 (function (App) {
     (function (Directives) {
         Directives.PepoplePickerCache = {};
+
         function PeoplePicker() {
             return {
                 templateUrl: 'templates/peoplePicker.html',
@@ -404,17 +394,16 @@ var App;
                             }
                         }
                     }).on("change", function (e) {
-                            $scope.person = e.val;
-                            $scope.$apply();
-                            console.log(e);
-                            if ($scope.onChange) {
-                                $scope.onChange({ val: e.val });
-                            }
-                        });
+                        $scope.person = e.val;
+                        $scope.$apply();
+                        console.log(e);
+                        if ($scope.onChange) {
+                            $scope.onChange({ val: e.val });
+                        }
+                    });
                 }
             };
         }
-
         Directives.PeoplePicker = PeoplePicker;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;
@@ -471,7 +460,6 @@ var App;
                 }
             };
         }
-
         Directives.ResultsByCategory = ResultsByCategory;
 
         function searchResults(query, $scope) {
@@ -597,7 +585,6 @@ var App;
                 }
             };
         }
-
         Directives.ResultsByClub = ResultsByClub;
 
         function groupResultyBy(results, groupFunction) {
@@ -655,7 +642,6 @@ var App;
                 }
             };
         }
-
         Directives.ResultsTableByEventClub = ResultsTableByEventClub;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;
@@ -682,7 +668,6 @@ var App;
                 }
             };
         }
-
         Directives.ResutsTableByPerson = ResutsTableByPerson;
     })(App.Directives || (App.Directives = {}));
     var Directives = App.Directives;
