@@ -1,17 +1,22 @@
 ## oevents  [![Build Status](https://travis-ci.org/yannisgu/oevents.png?branch=master)](https://travis-ci.org/yannisgu/oevents)
 
-### API
+### Installation
 
-#### classification
-Which importance the race has. The following values are valid:
- - 1=championship
- - 2=national competition
- - 3=regional competition
- - 4=local competition
- - 5=club competition
+To run oevents you need node.js installed. You can downoad it on  [http://nodejs.org].
+After node.js is installed you need to download the dependencies. Open a terminal and go to the directory with the source and run:
+`npm install -d`
 
- ### discipline
- Foot, Ski or Bike-Orienteering:
-  - 1 = Foot
-  - 2 = Ski
-  - 3 = Bike
+### Build
+
+To build the application execute the following command
+
+`grunt`
+
+### Run
+
+To run the application execute the following command
+
+`node dev.js`
+
+Now you can open a browser and open the application with http://localhost:5000/
+
