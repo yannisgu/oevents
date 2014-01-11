@@ -18,7 +18,6 @@
       "ent": ""
   },
   "devDependencies": {
-      "grunt-cli": "",
       "grunt": "",
        "grunt-html2js": "~0.1.7",
     "grunt-contrib-less": "~0.7.0",

@@ -5,6 +5,7 @@
 To run oevents you need node.js installed. You can downoad it on  [http://nodejs.org].
 After node.js is installed you need to download the dependencies. Open a terminal and go to the directory with the source and run:
 `npm install -d`
+`npm install grunt-cli -g`
 
 ### Build
 
@@ -18,5 +19,5 @@ To run the application execute the following command
 
 `node dev.js`
 
-Now you can open a browser and open the application with http://localhost:5000/
+Now you can open a browser and open the application with http://localhost:45201/
 
