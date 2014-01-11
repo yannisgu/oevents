@@ -144,6 +144,22 @@
 			"required": false,
 			"id": "urlSource",
 			"order": 17
+		},
+		"urlStartlist": {
+			"name": "urlStartlist",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "urlStartlist",
+			"order": 18
+		},
+		"urlResults": {
+			"name": "urlResults",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "urlResults",
+			"order": 19
 		}
 	}
 }
