@@ -40,12 +40,11 @@ module App.Directives {
 
                     dpd.peoplesearch.get({search: cleanupName(query.term)}, function(res, err) {
                         if(res.results ) {
-                            for(var i in res.results) {
+                            for(var i = 0; i < res.results.length && i < 10; i++) {
                                 var obj = res.results[i].obj;
-                                data.results.push({id: obj.id, text: obj.name + (obj.yearOfBirth ? ", " + obj.yearOfBirth : "")});
+                                data.results.push({id: obj._id, text: obj.name + (obj.yearOfBirth ? ", " + obj.yearOfBirth : "")});
 
                                 query.callback(data);
-
                             }
                         }
                     })
