@@ -32,6 +32,14 @@
 			"required": false,
 			"id": "location",
 			"order": 3
+		},
+		"nameIndex": {
+			"name": "nameIndex",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "nameIndex",
+			"order": 4
 		}
 	}
 }
