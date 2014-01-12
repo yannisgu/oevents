@@ -13,7 +13,7 @@
   "dependencies": {
     "deployd": "",
     "dpd-jobs": "",
-    "dpd-search": "",
+    "dpd-search": "0.0.2",
     "async": "",
       "dpd-fake-collection": "",
       "ent": ""
