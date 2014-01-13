@@ -4,7 +4,7 @@ var async = require('async');
 var ent = require("ent");
 out.log("Begining SOLV Import.");
 
-importYear(2013);
+importYear(2014);
 
 function importYear(year) {
     var url;
@@ -70,6 +70,7 @@ function importStartlist(options) {
                     if(result && result.length > 0) { 
                         var event = result[0];
                         event.urlStartlist = url;
+                        out.log(url)
                         dpd.events.post(event, function(result, err) {
                     var eventId = event.id;
                     for(var i = 0; i < categories.length; i++) {
