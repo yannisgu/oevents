@@ -52,7 +52,7 @@ module App.Directives {
 
                 }
             })
-            .on("change", function(e) {
+            .on("change", function(e : any) {
                     $scope.person= e.val;
                     $scope.$apply();
                     console.log(e)

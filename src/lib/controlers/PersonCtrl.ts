@@ -33,7 +33,7 @@ module App.Controllers{
                 dpd.resultsevents.get({personId: id}, function(res, err){
                     $scope.loading = false;
 
-                    res = _.map(res, function (result) {
+                    res = _.map(res, function (result : any) {
                         if (result.event && result.event.date) {
                             result.event.date = new Date(result.event.date);
                         }
@@ -63,7 +63,7 @@ module App.Controllers{
     }
 
     function groupResultyBy(results, groupFunction){
-        var groupsObj = _.reduce(results, function (merged, object, index) {
+        var groupsObj = _.reduce(results, function (merged, object : any, index2) {
             var index = groupFunction(object)
             merged[index] = merged[index] || {
                 title: index,

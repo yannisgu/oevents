@@ -16,7 +16,7 @@ module App.Controllers {
 
     export interface IGroupResults {
         title;
-        results: Array;
+        results: Array<any>;
         isOpen: Boolean;
     }
 
@@ -91,7 +91,7 @@ module App.Controllers {
                 $scope.$apply();
                 throw err;
             }
-            res = _.map(res, function (result) {
+            res = _.map(res, function (result : any) {
                 if (result.event && result.event.date) {
                     result.event.date = new Date(result.event.date);
                 }
@@ -103,7 +103,7 @@ module App.Controllers {
             });
 
             if ($scope.fromDate || $scope.toDate) {
-                res = _.filter(res, function (result) {
+                res = _.filter(res, function (result : any) {
                     var returnValue = true;
                     if ($scope.fromDate) {
                         returnValue = returnValue && $scope.fromDate <= result.event.date;
@@ -119,7 +119,7 @@ module App.Controllers {
             var groups:Array<IGroupResults> = [];
 
             if ($scope.groupByYear) {
-                var groupObj = _.groupBy(res, function (result) {
+                var groupObj = _.groupBy(res, function (result : any) {
                     return result.event.date.getFullYear();
                 })
 

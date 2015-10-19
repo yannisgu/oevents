@@ -88,7 +88,7 @@ module App.Directives {
 
             console.log(new Date().getTime())
 
-            var persons = _.reduce(res, function (merged, object, index) {
+            var persons = _.reduce(res, function (merged, object : any, index2) {
                 var index = object.personId;
                 merged[index] = merged[index] || {
                     name: object.name,

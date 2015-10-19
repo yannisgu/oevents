@@ -57,7 +57,7 @@ module App.Directives {
                         $scope.loading = false;
                         console.log((new Date).getTime())
 
-                        entries = _.map(entries, function (result) {
+                        entries = _.map(entries, function (result : any) {
                             if (result.event && result.event.date) {
                                 result.event.date = new Date(result.event.date);
                             }
@@ -82,7 +82,7 @@ module App.Directives {
     }
 
     function groupResultyBy(results, groupFunction) {
-        var groupsObj = _.reduce(results, function (merged, object, index) {
+        var groupsObj = _.reduce(results, function (merged, object : any, index2) {
             var index = groupFunction(object)
             merged[index] = merged[index] || {
                 title: index,
