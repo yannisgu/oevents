@@ -24,9 +24,6 @@
     "grunt-contrib-less": "~0.7.0",
       "grunt-typescript": ""
   },
-    "scripts": {
-        "start": "node af.js"
-    },
   "bundleDependencies": [],
   "private": true,
   "main": "app.js"
