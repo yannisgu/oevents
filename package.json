@@ -8,7 +8,7 @@
     "url": "https://gitub.com/yannisgu/oevents"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": "0.12.6"
   },
   "dependencies": {
     "deployd": "",
