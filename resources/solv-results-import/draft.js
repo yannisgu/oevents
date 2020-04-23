@@ -7,8 +7,8 @@ var request = require("request")
 out.log("Begining SOLV results import.");
 
 
-var startYear = (new Date()).getFullYear();
-var endYear = (new Date()).getFullYear();
+var startYear = 2001;
+var endYear = 2004;
 for (var year = startYear; year <= endYear; year++) {
     importYear(year);
 }

@@ -6,13 +6,8 @@ var server = deployd({
     port: process.env.PORT || 12334,
     env: process.env.NODE_ENV || 'production',
     db: {
-        host: "paulo.mongohq.com",
-        port: 10013,
-        name:  "oevents",
-        credentials: {
-            username: "oevents",
-            password: process.env.MONGOHQ_PASSWORD
-        },
+        host: "localhost",
+        name:  "oevents_old",
         options: {auto_reconnect: true}
     }
 });
